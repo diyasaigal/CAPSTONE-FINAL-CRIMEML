@@ -1,0 +1,8 @@
+_extends: base.yaml
+rl:
+  algo: lagrangian_ppo
+fairness:
+  alpha: 2.5          # ceiling on mean enforcement disparity: constraint is E[disparity] <= alpha
+  lambda_lr: 0.02
+  lambda_init: 0.0
+  lambda_max: 15.0

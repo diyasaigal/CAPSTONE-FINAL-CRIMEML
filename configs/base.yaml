@@ -1,0 +1,40 @@
+# Shared settings for the RL feedback-loop experiments. Individual runs overlay
+# this (see ppo_unconstrained.yaml / ppo_lagrangian.yaml).
+abm:
+  grid: 20
+  n_agents: 200
+  steps_per_shift: 4
+  stress_recovery: 0.18      # keep the deployment horizon stationary (crime ~flat over episode)
+  turnover_rate: 0.05        # residential mobility, per shift
+  patrol_stress_relief: 0.0  # patrol deters crime directly, not via stress
+
+detection:
+  p_report: 0.30
+  detect_gain: 0.55
+  detect_saturation: 1.5
+  deterrence_slope: 0.26
+  deterrence_cap: 0.68
+
+env:
+  n_units: 20
+  shifts_per_episode: 140
+  warmup_shifts: 20
+  history: 4
+  include_socioeconomic_obs: true
+  reward_on: captured
+  action_mode: rule
+
+fairness:
+  protected_attr: hardship
+  n_quantiles: 5
+  metric: exposure_ratio
+
+rl:
+  total_timesteps: 150000
+  n_steps: 2048
+  batch_size: 256
+  learning_rate: 0.0003
+  ent_coef: 0.01
+  n_envs: 8
+  extractor: mlp
+  seed: 0

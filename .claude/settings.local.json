@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/DENNIS/Downloads/**)",
+      "Bash(mkdir -p ABM_Aug23_extracted)",
+      "Bash(unzip -o ABM_Aug23.zip -d ABM_Aug23_extracted)",
+      "Bash(python -c \"import pdfplumber; print\\('pdfplumber ok'\\)\")",
+      "Bash(python -c \"import pypdf; print\\('pypdf ok'\\)\")",
+      "Bash(python -c \"import fitz; print\\('pymupdf ok'\\)\")",
+      "Bash(pdftotext -layout \"C:/Users/DENNIS/Downloads/Capstone_7th_sem_draft-2.pdf\" draft2.txt)",
+      "Bash(pdftotext -layout \"C:/Users/DENNIS/Dennis/academics/PES/Sem-5/CapstoneProject/FinalCapstoneReport/CapstoneReportFinal.pdf\" oldreport.txt)",
+      "WebSearch",
+      "WebFetch(domain:arxiv.org)",
+      "WebFetch(domain:www.sciencedirect.com)"
+    ]
+  }
+}

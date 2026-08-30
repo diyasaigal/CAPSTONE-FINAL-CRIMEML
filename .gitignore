@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.git/
+runs/
+results/*.pkl
+run.log
+data/region_*.npz
+data/ca_lookup_*.npz
+data/processed_crime.csv
