@@ -12,6 +12,8 @@ Metrics, each a per-shift trajectory averaged over episodes and lightly smoothed
   * ``recorded_latent_emd`` -- EMD between recorded-crime and latent-crime shares.
   * ``runaway_index``       -- partial correlation between this shift's deployment
      and cumulative past deployment, controlling for current latent crime.
+     CAUTION (PIVOT_AUDIT.md F3): any static allocation scores ~1.0 here, so
+     it measures persistence, not feedback; do not report it as a loop measure.
 """
 from __future__ import annotations
 
@@ -19,6 +21,7 @@ import numpy as np
 import pandas as pd
 
 from crimesim.env.fairness import gini
+from crimesim.eval.oracle_relative import iter_episodes
 
 
 def _emd(a: np.ndarray, b: np.ndarray) -> float:
@@ -36,22 +39,9 @@ def _partial_corr(x, y, z) -> float:
     return float(np.corrcoef(rx, ry)[0, 1])
 
 
-def _episodes(g: pd.DataFrame):
-    """Yield each contiguous episode (shift running 0,1,2,...) as an ordered frame.
-
-    Pooled policies contain several independent rollouts concatenated; we split
-    wherever ``shift`` does not increase.
-    """
-    g = g.reset_index(drop=True)
-    shift = g["shift"].to_numpy()
-    starts = np.where(np.r_[True, np.diff(shift) <= 0])[0]
-    for a, b in zip(starts, np.r_[starts[1:], len(g)]):
-        yield g.iloc[a:b]
-
-
 def feedback_trajectories(df: pd.DataFrame, smooth: int = 9) -> pd.DataFrame:
     rows = []
-    for ep_id, ep in enumerate(_episodes(df)):
+    for ep_id, ep in enumerate(iter_episodes(df)):
         dep = np.stack(ep["deployment"].to_numpy())
         lat = np.stack(ep["latent_region"].to_numpy())
         rec = np.stack(ep["recorded_region"].to_numpy())

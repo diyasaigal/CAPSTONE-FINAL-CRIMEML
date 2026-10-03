@@ -1,4 +1,5 @@
-"""Minimal OLS with heteroskedasticity-robust (HC1) standard errors.
+"""Minimal OLS with heteroskedasticity-robust (HC1) or cluster-robust (CR1)
+standard errors, plus a hierarchical bootstrap over training x eval seeds.
 
 Kept dependency-free (no statsmodels). Returns coefficients, robust SEs, t-stats,
 two-sided p-values and R^2.
@@ -34,7 +35,13 @@ class OLSResult:
                 "t": float(self.t[i]), "p": float(self.p[i])}
 
 
-def ols(y: np.ndarray, X: dict[str, np.ndarray], add_const: bool = True) -> OLSResult:
+def ols(y: np.ndarray, X: dict[str, np.ndarray], add_const: bool = True,
+        cluster: np.ndarray | None = None) -> OLSResult:
+    """OLS with HC1 SEs, or CR1 cluster-robust SEs when ``cluster`` labels are given.
+
+    Use clusters whenever rows are not independent (e.g. every region-shift of
+    one episode): HC1 then understates the SEs by an order of magnitude.
+    """
     names = list(X.keys())
     cols = [np.asarray(X[k], float) for k in names]
     if add_const:
@@ -47,15 +54,47 @@ def ols(y: np.ndarray, X: dict[str, np.ndarray], add_const: bool = True) -> OLSR
     XtX_inv = np.linalg.pinv(Xm.T @ Xm)
     beta = XtX_inv @ Xm.T @ y
     resid = y - Xm @ beta
-    # HC1 robust covariance
-    S = (Xm * resid[:, None]).T @ (Xm * resid[:, None])
-    cov = XtX_inv @ S @ XtX_inv * (n / max(n - k, 1))
+    if cluster is None:
+        # HC1 robust covariance
+        S = (Xm * resid[:, None]).T @ (Xm * resid[:, None])
+        cov = XtX_inv @ S @ XtX_inv * (n / max(n - k, 1))
+        df = max(n - k, 1)
+    else:
+        # CR1: sum the score within each cluster, small-sample adjusted
+        labels, idx = np.unique(np.asarray(cluster), return_inverse=True)
+        G = len(labels)
+        if G < 2:
+            raise ValueError("cluster-robust SEs need at least 2 clusters")
+        U = np.zeros((G, k))
+        np.add.at(U, idx, Xm * resid[:, None])
+        cov = XtX_inv @ (U.T @ U) @ XtX_inv * (G / (G - 1)) * ((n - 1) / max(n - k, 1))
+        df = G - 1
     se = np.sqrt(np.diag(cov))
     tstat = beta / np.where(se > 0, se, np.nan)
-    p = 2 * _sps.t.sf(np.abs(tstat), df=max(n - k, 1))
+    p = 2 * _sps.t.sf(np.abs(tstat), df=df)
     ss_tot = np.sum((y - y.mean()) ** 2)
     r2 = 1 - np.sum(resid ** 2) / ss_tot if ss_tot > 0 else 0.0
     return OLSResult(names, beta, se, tstat, p, float(r2), n)
+
+
+def hierarchical_bootstrap(M: np.ndarray, n_boot: int = 4000, level: float = 0.95,
+                           seed: int = 0) -> tuple[float, float, float]:
+    """Mean of a (training seed x eval seed) matrix with a two-level percentile CI.
+
+    Each replicate resamples rows (training seeds) and then columns (eval
+    seeds) with replacement, so both sources of variability enter the CI.
+    Columns are resampled jointly across rows, which keeps paired eval seeds
+    paired. NaN cells are ignored. A single row reduces to an eval-seed bootstrap.
+    """
+    M = np.atleast_2d(np.asarray(M, float))
+    rng = np.random.default_rng(seed)
+    r, c = M.shape
+    ri = rng.integers(0, r, (n_boot, r))
+    ci = rng.integers(0, c, (n_boot, c))
+    reps = np.array([np.nanmean(M[np.ix_(a, b)]) for a, b in zip(ri, ci)])
+    a = (1 - level) / 2
+    lo, hi = np.nanpercentile(reps, [100 * a, 100 * (1 - a)])
+    return float(np.nanmean(M)), float(lo), float(hi)
 
 
 def mean_ci(x: np.ndarray, level: float = 0.95) -> tuple[float, float]:
