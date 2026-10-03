@@ -43,3 +43,37 @@ def test_lambda_falls_below_cost_limit_and_is_projected():
 
 def test_default_config_has_zero_cost_limit():
     assert load_config("configs/ppo_lagrangian.yaml").fairness.cost_limit == 0.0
+
+
+# ---------------------------------------------------------------- oracle-referenced penalty
+def _meter(ref):
+    from crimesim.abm.regions import load_region_info
+    from crimesim.env.fairness import FairnessMeter
+    cfg = load_config(fairness={"ref_disparity": ref}).fairness
+    region = load_region_info(20)
+    return FairnessMeter(cfg, region), region.quantile_groups("hardship", 5)
+
+
+def test_excess_log_disparity_penalises_only_beyond_reference():
+    m, groups = _meter(2.0)
+    dep = np.ones(len(groups))
+    dep[groups == groups.max()] = 6.0                      # top quantile 6x bottom
+    out = m.update(dep)
+    assert out["disparity_shift"] == pytest.approx(6.0)
+    assert out["excess_log_disparity"] == pytest.approx(np.log(3.0))
+    m.reset()
+    assert m.update(np.ones(len(groups)))["excess_log_disparity"] == 0.0   # below reference
+
+
+def test_excess_log_disparity_is_off_without_reference():
+    m, groups = _meter(0.0)
+    dep = np.ones(len(groups))
+    dep[groups == groups.max()] = 6.0
+    assert m.update(dep)["excess_log_disparity"] == 0.0
+
+
+def test_reference_penalty_requires_reference_value():
+    from crimesim.rl.constrained_ppo import train_penalized_ppo
+    cfg = load_config(fairness={"penalty": 0.1, "penalty_mode": "excess_log_ref"})
+    with pytest.raises(ValueError, match="ref_disparity"):
+        train_penalized_ppo(cfg)

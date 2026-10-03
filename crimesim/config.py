@@ -105,6 +105,11 @@ class FairnessConfig:
     # penalty method (main): reward becomes  r - penalty * disparity_shift.
     # Sweeping `penalty` traces the efficiency-equity frontier by construction.
     penalty: float = 0.0
+    # "linear": penalty * disparity_shift (pushes disparity toward 0, the original sweep)
+    # "excess_log_ref": penalty * max(0, ln disparity_shift - ln ref_disparity), i.e. only
+    #     disparity beyond a reference policy's (the GreedyOracle's) is penalised
+    penalty_mode: str = "linear"
+    ref_disparity: float = 0.0
     # Lagrangian method (alternative): dual ascent on lambda toward
     # E[max(0, disparity_cum - alpha)] <= cost_limit, i.e. disparity held at ~alpha.
     alpha: float = 2.0

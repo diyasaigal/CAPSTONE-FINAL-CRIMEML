@@ -5,6 +5,9 @@ Two methods, both shaping the reward with the per-shift enforcement disparity:
 * **Penalty method** (``train_penalized_ppo``, the one used for the main results):
   a fixed weight ``w`` -- reward becomes ``r - w * disparity_shift``. Sweeping
   ``w`` traces the efficiency-equity frontier by construction; robust, no tuning.
+  With ``fairness.penalty_mode="excess_log_ref"`` the penalty is instead
+  ``w * max(0, ln disparity_shift - ln ref_disparity)``: only disparity beyond
+  a reference policy's (the need-proportional GreedyOracle's) is penalised.
 
 * **Lagrangian method** (``train_lagrangian_ppo``): dual ascent on a multiplier
   toward a disparity ceiling ``alpha`` (Chow et al. 2017; Tessler et al. 2019;
@@ -108,8 +111,16 @@ def _finish(model, vnorm, save_dir, cfg, history):
     return model, vnorm, history
 
 
+_PENALTY_KEYS = {"linear": "disparity_shift", "excess_log_ref": "excess_log_disparity"}
+
+
 def train_penalized_ppo(cfg: Config, *, save_dir=None, verbose: int = 0):
-    shaped = ShapedRewardWrapper(_venv(cfg), cfg.fairness.penalty, "disparity_shift")
+    f = cfg.fairness
+    if f.penalty_mode not in _PENALTY_KEYS:
+        raise ValueError(f"unknown penalty_mode={f.penalty_mode!r}")
+    if f.penalty_mode == "excess_log_ref" and f.ref_disparity <= 0:
+        raise ValueError("penalty_mode='excess_log_ref' needs fairness.ref_disparity > 0")
+    shaped = ShapedRewardWrapper(_venv(cfg), f.penalty, _PENALTY_KEYS[f.penalty_mode])
     norm_r = cfg.env.reward_on not in _COVERAGE_REWARDS
     vnorm = VecNormalize(shaped, norm_obs=True, norm_reward=norm_r, clip_obs=10.0, gamma=cfg.rl.gamma)
     model = _ppo(cfg, vnorm, verbose)

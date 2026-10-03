@@ -76,8 +76,11 @@ class FairnessMeter:
         # report, and there is no gradient once disparity_cum <= alpha (so the
         # policy settles near alpha rather than collapsing to 0).
         cost = max(0.0, cum - self.alpha)
+        ref = float(self.cfg.ref_disparity)
+        excess = max(0.0, float(np.log(max(shift, 1e-9) / ref))) if ref > 0 else 0.0
         return {
             "disparity_shift": shift,
+            "excess_log_disparity": excess,
             "disparity_cum": cum,
             "gini_cum": gini(exposure_per_capita(self.cum_deploy, self.pop_weight)),
             "cost": cost,
