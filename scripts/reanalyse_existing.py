@@ -35,7 +35,9 @@ region = load_region_info(20)
 
 
 def load_rl(fam: str, s: int) -> pd.DataFrame:
-    return pd.read_pickle(RUNS / f"{fam}_s{s}" / f"eval_{TAG}.pkl")
+    # the 150k s0-s2 models were moved to runs/_150k/ when they were retrained at 400k
+    d = RUNS / "_150k" if s in BUDGETS["150k"] else RUNS
+    return pd.read_pickle(d / f"{fam}_s{s}" / f"eval_{TAG}.pkl")
 
 
 # ------------------------------------------------------------------ E1 / E2 / E4

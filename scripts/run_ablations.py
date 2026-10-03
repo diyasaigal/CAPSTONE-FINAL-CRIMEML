@@ -60,6 +60,24 @@ def reference_rollouts(vname: str, ecfg, seeds: list[int], suffix: str) -> pd.Da
     return df
 
 
+KINDS = {"ppo": lambda pen: {"rl": {"algo": "ppo"}},
+         "fair": lambda pen: {"rl": {"algo": "penalized_ppo"}, "fairness": {"penalty": pen}}}
+
+
+def train_specs(variants: list[str], seeds: list[int], timesteps: int,
+                penalty: float) -> dict:
+    """run name -> (training config, algo) for every E5 model."""
+    specs = {}
+    for vname in variants:
+        for kind, extra in KINDS.items():
+            for s in seeds:
+                merged = _merge(VARIANTS[vname], {"rl": {"seed": s, "total_timesteps": timesteps},
+                                                  "env": {"seed": s}}, extra(penalty))
+                cfg = load_config("configs/base.yaml", **merged)
+                specs[f"abl_{vname}_{kind}_{timesteps // 1000}k_s{s}"] = (cfg, cfg.rl.algo)
+    return specs
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--train-seeds", "--seeds", dest="seeds", type=int, nargs="+", default=[0, 1, 2])
@@ -83,17 +101,14 @@ def main() -> None:
         ref = reference_disparity(orc)
         need = long_run_need(refs[refs.policy == "uniform"])
         vt = [orc]
-        for kind, extra in [("ppo", {"rl": {"algo": "ppo"}}),
-                            ("fair", {"rl": {"algo": "penalized_ppo"},
-                                      "fairness": {"penalty": args.penalty}})]:
+        specs = train_specs([vname], args.seeds, args.timesteps, args.penalty)
+        for kind in KINDS:
             frames = []
             for s in args.seeds:
-                merged = _merge(over, {"rl": {"seed": s, "total_timesteps": args.timesteps},
-                                       "env": {"seed": s}}, extra)
-                cfg = load_config("configs/base.yaml", **merged)
                 name = f"abl_{vname}_{kind}_{budget}_s{s}"
+                cfg, algo = specs[name]
                 t0 = time.time()
-                out = ensure_trained(name, cfg, cfg.rl.algo)
+                out = ensure_trained(name, cfg, algo)
                 t1 = time.time()
                 df = eval_policy(name, out, ecfg, args.eval_seeds, tag)
                 print(f"{name}: train {t1 - t0:.0f}s, eval {time.time() - t1:.0f}s", flush=True)
