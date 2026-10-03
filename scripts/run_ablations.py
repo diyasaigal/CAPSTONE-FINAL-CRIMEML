@@ -1,33 +1,42 @@
 import crimesim._env_setup  # noqa: F401
 """E5 -- robustness / ablations.
 
-For each variant we train a naive PPO and one mid-alpha Lagrangian PPO, evaluate
-on held-out seeds, and record the headline quantities: latent crime, enforcement
-disparity, and the E3 hardship-incidence coefficient. Resumable.
+For each variant we train a naive PPO and a penalised PPO (fixed penalty,
+``--penalty``) on several training seeds, evaluate on held-out seeds, and score
+every policy against that variant's own GreedyOracle on the same eval seeds
+(``crimesim.eval.oracle_relative``). Resumable: trained models and rollouts are
+cached, and run names / output files carry the timestep budget and eval-seed
+set, so runs at different budgets never collide (PIVOT_AUDIT.md F2).
 
-Key control: ``perfect_obs`` sets p_report=1 so patrol no longer inflates the
-record -- the feedback loop should then collapse (a falsification check).
+Observation-channel controls:
+  * ``perfect_obs``  -- p_report=1, detect_gain=0: every latent crime is
+    recorded, so patrol no longer inflates the record.
+  * ``const_detect`` -- p_report=0.667, detect_gain=0: detection is again
+    independent of patrol, but at the latent-weighted detection rate that
+    Uniform patrol achieves in the base setting, so the agent sees about as
+    much data as in ``base``. Separates "contamination" from "more data".
 """
 import argparse
-import dataclasses
-import json
+import time
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
-from crimesim.config import load_config
 from crimesim.abm.regions import load_region_info
-from crimesim.eval.incidence import build_panel, incidence_regression
-from crimesim.eval.rollout import rollout, summarise
-from crimesim.rl.baselines import make_baselines
-from crimesim.experiments.registry import ensure_trained, eval_policy, RUNS
+from crimesim.config import load_config
+from crimesim.eval.incidence import long_run_need, need_controlled_incidence
+from crimesim.eval.oracle_relative import (add_reference_shift, episode_table,
+                                           reference_disparity, relative_summary)
+from crimesim.eval.rollout import rollout
+from crimesim.experiments.registry import ensure_trained, eval_policy
+from crimesim.rl.baselines import GreedyOracle, UniformPolicy
 
 RESULTS = Path("results")
 
 VARIANTS = {
     "base":            {},
     "perfect_obs":     {"detection": {"p_report": 1.0, "detect_gain": 0.0}},
+    "const_detect":    {"detection": {"p_report": 0.667, "detect_gain": 0.0}},
     "low_detect_gain": {"detection": {"detect_gain": 0.25}},
     "high_detect_gain":{"detection": {"detect_gain": 0.8}},
     "weak_deterrence": {"detection": {"deterrence_slope": 0.10}},
@@ -40,53 +49,76 @@ VARIANTS = {
 }
 
 
+def reference_rollouts(vname: str, ecfg, seeds: list[int], suffix: str) -> pd.DataFrame:
+    """GreedyOracle + Uniform under this variant on the eval seeds (cached)."""
+    cache = RESULTS / f"e5_refs_{vname}_{suffix}.pkl"
+    if cache.exists():
+        return pd.read_pickle(cache)
+    df = pd.concat([rollout(p, ecfg, seeds, keep_arrays=True)
+                    for p in (GreedyOracle(), UniformPolicy())], ignore_index=True)
+    df.to_pickle(cache)
+    return df
+
+
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--train-seeds", "--seeds", dest="seeds", type=int, nargs="+", default=[0, 1])
-    ap.add_argument("--eval-seeds", type=int, nargs="+", default=list(range(300, 308)))
-    ap.add_argument("--timesteps", type=int, default=150000)
+    ap.add_argument("--train-seeds", "--seeds", dest="seeds", type=int, nargs="+", default=[0, 1, 2])
+    ap.add_argument("--eval-seeds", type=int, nargs="+", default=list(range(300, 320)))
+    ap.add_argument("--timesteps", type=int, default=400000)
     ap.add_argument("--penalty", type=float, default=0.06)
     ap.add_argument("--only", nargs="+", default=None)
     args = ap.parse_args()
     RESULTS.mkdir(exist_ok=True)
     region = load_region_info(20)
-    tag = f"abl_e{args.eval_seeds[0]}n{len(args.eval_seeds)}"
+    budget = f"{args.timesteps // 1000}k"
+    suffix = f"e{args.eval_seeds[0]}n{len(args.eval_seeds)}"
+    tag = f"abl_{suffix}"
 
-    rows = []
+    tables, raw, inc = [], [], []
     variants = {k: VARIANTS[k] for k in (args.only or VARIANTS)}
     for vname, over in variants.items():
-        for s in args.seeds:
-            for kind, extra in [("ppo", {"rl": {"algo": "ppo"}}),
-                                ("fair", {"rl": {"algo": "penalized_ppo"},
-                                          "fairness": {"penalty": args.penalty}})]:
+        ecfg = load_config("configs/base.yaml", **_merge(over, {}))
+        refs = reference_rollouts(vname, ecfg, args.eval_seeds, suffix)
+        orc = episode_table(refs[refs.policy == "oracle"], region, variant=vname, kind="oracle", tseed=-1)
+        ref = reference_disparity(orc)
+        need = long_run_need(refs[refs.policy == "uniform"])
+        vt = [orc]
+        for kind, extra in [("ppo", {"rl": {"algo": "ppo"}}),
+                            ("fair", {"rl": {"algo": "penalized_ppo"},
+                                      "fairness": {"penalty": args.penalty}})]:
+            frames = []
+            for s in args.seeds:
                 merged = _merge(over, {"rl": {"seed": s, "total_timesteps": args.timesteps},
                                        "env": {"seed": s}}, extra)
                 cfg = load_config("configs/base.yaml", **merged)
-                name = f"abl_{vname}_{kind}_s{s}"
-                print(f"train {name}", flush=True)
+                name = f"abl_{vname}_{kind}_{budget}_s{s}"
+                t0 = time.time()
                 out = ensure_trained(name, cfg, cfg.rl.algo)
-                ecfg = load_config("configs/base.yaml", **_merge(over, {}))
+                t1 = time.time()
                 df = eval_policy(name, out, ecfg, args.eval_seeds, tag)
+                print(f"{name}: train {t1 - t0:.0f}s, eval {time.time() - t1:.0f}s", flush=True)
                 df = df.assign(variant=vname, kind=kind, tseed=s)
-                rows.append(df)
+                frames.append(df)
+                vt.append(episode_table(df, region, variant=vname, kind=kind, tseed=s))
+            g = pd.concat(frames, ignore_index=True)
+            raw.append(g)
+            h = need_controlled_incidence(g, region, need)["hardship"]
+            inc.append({"variant": vname, "kind": kind, "hardship_coef": h["coef"],
+                        "hardship_t": h["t"], "hardship_p": h["p"]})
+        eps = add_reference_shift(pd.concat(vt, ignore_index=True), ref)
+        tables.append((eps, relative_summary(eps, ["variant", "kind"], ref)))
 
-    alldf = pd.concat(rows, ignore_index=True)
-    alldf.to_pickle(RESULTS / "e5_ablations_raw.pkl")
-
-    summ = []
-    for (vname, kind), g in alldf.groupby(["variant", "kind"]):
-        s = summarise(g.assign(policy=f"{vname}_{kind}")).iloc[0]
-        panel = build_panel(g.assign(policy="x"), region)
-        try:
-            coef = incidence_regression(panel, "x")["hardship"]["coef"]
-        except Exception:
-            coef = np.nan
-        summ.append({"variant": vname, "kind": kind, "latent": s["latent"],
-                     "latent_ci": s["latent_ci"], "disparity": s["disparity"],
-                     "gini": s["gini"], "hardship_incidence_coef": coef})
-    out = pd.DataFrame(summ).sort_values(["variant", "kind"])
-    out.to_csv(RESULTS / "e5_ablations.csv", index=False)
-    print("\n== E5 ==\n", out.to_string(index=False))
+    pd.concat(raw, ignore_index=True).to_pickle(RESULTS / f"e5_{budget}_{suffix}_raw.pkl")
+    pd.concat([e for e, _ in tables], ignore_index=True).to_csv(
+        RESULTS / f"e5_{budget}_{suffix}_episodes.csv", index=False)
+    out = (pd.concat([s for _, s in tables], ignore_index=True)
+           .merge(pd.DataFrame(inc), on=["variant", "kind"], how="left"))
+    out.to_csv(RESULTS / f"e5_{budget}_{suffix}.csv", index=False)
+    cols = ["variant", "kind", "n_train_seeds", "n_eval_seeds", "x_ref", "x_ref_lo", "x_ref_hi",
+            "disparity", "lat_cov", "proxy_gap", "rec_distortion", "hardship_t"]
+    pd.set_option("display.width", 220)
+    print(f"\n== E5 ({budget}, eval {suffix}): disparity x own-variant GreedyOracle ==")
+    print(out[cols].round(3).to_string(index=False))
 
 
 def _merge(*dicts):

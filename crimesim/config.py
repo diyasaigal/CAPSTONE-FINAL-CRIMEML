@@ -105,8 +105,10 @@ class FairnessConfig:
     # penalty method (main): reward becomes  r - penalty * disparity_shift.
     # Sweeping `penalty` traces the efficiency-equity frontier by construction.
     penalty: float = 0.0
-    # Lagrangian method (alternative): dual ascent on lambda toward E[disparity] <= alpha.
+    # Lagrangian method (alternative): dual ascent on lambda toward
+    # E[max(0, disparity_cum - alpha)] <= cost_limit, i.e. disparity held at ~alpha.
     alpha: float = 2.0
+    cost_limit: float = 0.0
     lambda_lr: float = 0.02
     lambda_init: float = 0.0
     lambda_max: float = 15.0

@@ -56,10 +56,19 @@ class ShapedRewardWrapper(VecEnvWrapper):
 
 
 class DualAscentCallback(BaseCallback):
-    def __init__(self, wrapper: ShapedRewardWrapper, alpha: float, lr: float,
-                 lambda_max: float, verbose: int = 0):
+    """Projected dual ascent on the reward-shaping weight (the multiplier lambda).
+
+    The env's ``cost`` is already hinged at the ceiling, ``max(0, disparity_cum -
+    alpha)`` (``FairnessMeter``), so the constraint is E[cost] <= ``cost_limit``
+    and lambda grows only while the rollout-mean cost exceeds it. (The previous
+    version subtracted a hard-coded 0.15 instead, letting disparity settle above
+    alpha -- PIVOT_AUDIT.md.)
+    """
+
+    def __init__(self, wrapper: ShapedRewardWrapper, lr: float, lambda_max: float,
+                 cost_limit: float = 0.0, verbose: int = 0):
         super().__init__(verbose)
-        self.w, self.alpha, self.lr, self.lambda_max = wrapper, alpha, lr, lambda_max
+        self.w, self.lr, self.lambda_max, self.cost_limit = wrapper, lr, lambda_max, cost_limit
         self.history: list[tuple[int, float, float]] = []
 
     def _on_step(self) -> bool:
@@ -68,7 +77,7 @@ class DualAscentCallback(BaseCallback):
     def _on_rollout_end(self) -> None:
         mean_cost = self.w.drain()                       # mean hinged disparity
         self.w.weight = float(np.clip(
-            self.w.weight + self.lr * (mean_cost - 0.15), 0.0, self.lambda_max))
+            self.w.weight + self.lr * (mean_cost - self.cost_limit), 0.0, self.lambda_max))
         self.history.append((self.num_timesteps, mean_cost, self.w.weight))
 
 
@@ -114,6 +123,6 @@ def train_lagrangian_ppo(cfg: Config, *, save_dir=None, verbose: int = 0):
     norm_r = cfg.env.reward_on not in _COVERAGE_REWARDS
     vnorm = VecNormalize(shaped, norm_obs=True, norm_reward=norm_r, clip_obs=10.0, gamma=cfg.rl.gamma)
     model = _ppo(cfg, vnorm, verbose)
-    cb = DualAscentCallback(shaped, f.alpha, f.lambda_lr, f.lambda_max, verbose)
+    cb = DualAscentCallback(shaped, f.lambda_lr, f.lambda_max, f.cost_limit, verbose)
     model.learn(total_timesteps=cfg.rl.total_timesteps, callback=cb, progress_bar=False)
     return _finish(model, vnorm, save_dir, cfg, cb.history)

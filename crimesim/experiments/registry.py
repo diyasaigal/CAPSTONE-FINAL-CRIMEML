@@ -37,6 +37,12 @@ def rl_specs(base_cfg_path: str, seeds: list[int], penalties: list[float]) -> di
 def ensure_trained(name: str, cfg: Config, algo: str, *, force: bool = False) -> Path:
     out = RUNS / name
     if (out / "ppo_model.zip").exists() and not force:
+        saved = out / "config.yaml"
+        if saved.exists() and load_config(saved).to_dict() != cfg.to_dict():
+            # PIVOT_AUDIT.md F2: never silently reuse a model trained with another
+            # config (e.g. a different timestep budget) under the same name
+            raise RuntimeError(f"{out} was trained with a different config; "
+                               "use a new run name or force=True")
         return out
     if algo == "penalized_ppo":
         _, vn, _ = train_penalized_ppo(cfg, save_dir=out, verbose=0)
@@ -69,7 +75,7 @@ def eval_baselines(eval_cfg: Config, seeds: list[int], cache_dir: Path,
     frames = [rollout(p, eval_cfg, seeds=seeds, keep_arrays=True)
               for p in make_baselines().values()]
     df = pd.concat(frames, ignore_index=True)
-    cache.mkdir(parents=True, exist_ok=True) if False else cache_dir.mkdir(parents=True, exist_ok=True)
+    cache_dir.mkdir(parents=True, exist_ok=True)
     df.to_pickle(cache)
     return df
 
