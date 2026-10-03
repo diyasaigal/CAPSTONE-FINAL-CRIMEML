@@ -69,8 +69,14 @@ def rollout(policy, cfg: Config, seeds, *, keep_arrays: bool = False,
 
 
 def summarise(df: pd.DataFrame) -> pd.DataFrame:
-    """Per-policy episode-level means with 95% CIs (over seeds)."""
-    ep = df.groupby(["policy", "seed"]).agg(
+    """Per-policy episode-level means with 95% CIs (over episodes/seeds)."""
+    # Track discrete episodes by detecting shift resets
+    shift_arr = df["shift"].to_numpy()
+    is_start = np.r_[True, shift_arr[1:] <= shift_arr[:-1]]
+    ep_id = np.cumsum(is_start)
+    df_ep = df.assign(_ep_id=ep_id)
+
+    ep = df_ep.groupby(["policy", "_ep_id"]).agg(
         latent_per_shift=("latent_total", "mean"),
         recorded_per_shift=("recorded_total", "mean"),
         recorded_coverage=("recorded_coverage", "mean"),
@@ -78,6 +84,7 @@ def summarise(df: pd.DataFrame) -> pd.DataFrame:
         disparity_shift_mean=("disparity_shift", "mean"),
         disparity_cum_final=("disparity_cum", "last"),
         gini_cum_final=("gini_cum", "last"),
+        seed=("seed", "first"),
     ).reset_index()
 
     def ci(s):
@@ -96,7 +103,7 @@ def summarise(df: pd.DataFrame) -> pd.DataFrame:
         disparity_shift=("disparity_shift_mean", "mean"),
         gini=("gini_cum_final", "mean"),
         gini_ci=("gini_cum_final", ci),
-        n_seeds=("seed", "nunique"),
+        n_seeds=("_ep_id", "nunique"),
     ).reset_index()
 
     # efficiency vs the uniform reference (share of extra crime prevented)

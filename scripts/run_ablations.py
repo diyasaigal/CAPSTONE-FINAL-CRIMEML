@@ -42,7 +42,7 @@ VARIANTS = {
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1])
+    ap.add_argument("--train-seeds", "--seeds", dest="seeds", type=int, nargs="+", default=[0, 1])
     ap.add_argument("--eval-seeds", type=int, nargs="+", default=list(range(300, 308)))
     ap.add_argument("--timesteps", type=int, default=150000)
     ap.add_argument("--penalty", type=float, default=0.06)
