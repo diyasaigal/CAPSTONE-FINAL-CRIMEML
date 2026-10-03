@@ -53,7 +53,7 @@ gymnasium 1.3.0, numpy 2.4.6, pandas 3.0.6):
 | E5: perfect observation 9.04 → 2.92 | SUPPORTED as computed | but **1 training seed, 6 eval seeds (300–305)**, not ten as the paper says; trained for 120k steps vs 150k for main; per-episode base disparity ranges **4.4–13.8** |
 | E5 configs differ only in detection parameters | SUPPORTED | `runs/abl_base_ppo_s0` vs `abl_perfect_obs_ppo_s0`: only `p_report`/`detect_gain` differ; training and eval seeds are matched |
 | `run_ablations.py` accepts `--train-seeds` | SUPPORTED (uncommitted) | `scripts/run_ablations.py:45` |
-| Lagrangian PPO works as described | **NOT SUPPORTED** | `constrained_ppo.py:71` targets a hard-coded `0.15` and ignores `alpha` |
+| Lagrangian PPO works as described | **NOT SUPPORTED** | `constrained_ppo.py:71` subtracts a hard-coded `0.15` slack from the already-hinged cost `max(0, δ_cum − alpha)`, so disparity can settle above `alpha` (correction 2026-10-04: `alpha` does enter through the env's cost; the callback's own `alpha` argument was the unused part). Fixed in 6f53139 |
 | Python at `.venv/bin/python3` | NOT APPLICABLE here | `.venv/` is a macOS venv copied from a teammate. This machine uses `.venv-win/`. |
 
 ---
@@ -122,7 +122,7 @@ The new `summarise()` (uncommitted) computes CIs over all 30 episodes, treating 
 | `eval/incidence.py` | DV = dep − lat_t, control lat_t, HC1 | Add a `need`-based spec plus episode-clustered SEs; keep the old spec as a robustness row. Remove the unused `last` in `exposure_by_hardship_quintile` | Medium | Cluster SE vs HC1 on i.i.d. data ≈ equal |
 | `eval/stats.py::ols` | HC1 only | Add a `cluster=` argument (CR1) | Low | as above |
 | `eval/pareto.py`, `figures.py::fig_pareto/fig_efficiency_equity` | x = raw δ, "lower is better" | x = |Δlog| vs reference (or δ with the reference line drawn); relabel axes; no hard-coded 2.71 | Low | Regenerate and inspect |
-| `rl/constrained_ppo.py::DualAscentCallback` | targets `0.15`, ignores `alpha` | Use `alpha` with a cost of `max(0, δ_cum − alpha)` → target δ_ref | Medium (needs retrain) | Short training run: λ rises when cost > 0 |
+| `rl/constrained_ppo.py::DualAscentCallback` | hard-coded `0.15` slack on the hinged cost | Ascend on `mean_cost − cost_limit` (default 0); set `alpha = δ_ref` | Medium (needs retrain) | **Done 6f53139**; unit-tested in `tests/test_constrained.py` |
 | `rl/constrained_ppo.py` (optional) | `−w·δ` | add `penalty_mode: "linear" \| "hinge_ref" \| "abs_log_ref"` | Medium | Unit test of shaped reward |
 | `scripts/run_ablations.py` | 11 variants; stale "Lagrangian" docstring | Add `const_detect` (`p_report 0.667, detect_gain 0`); fix the docstring; output mean ± CI over training seeds | Low | — |
 | `scripts/run_all.py` / `registry.ensure_trained` | Reuses any existing run | Store `total_timesteps` in the run name (e.g. `ppo_t150k_s3`) **or** assert the config matches the cache | Low; prevents F2 | Test: mismatched config raises |
