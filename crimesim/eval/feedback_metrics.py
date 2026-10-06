@@ -68,6 +68,24 @@ def feedback_trajectories(df: pd.DataFrame, smooth: int = 9) -> pd.DataFrame:
     return traj
 
 
+def self_induced_signal(ep: pd.DataFrame, burn_in: float = 0.3) -> float:
+    """Does past patrol inflate a district's record relative to its truth? (PIVOT_AUDIT.md B4)
+
+    Per shift t: partial correlation across regions between the patrol share at
+    t-1 and the over-recording ``rec_share[t] - lat_share[t]``, controlling for
+    ``lat_share[t]``; averaged over shifts after the burn-in. ~0 when detection
+    does not depend on patrol or when patrol is uniform.
+    """
+    dep = np.stack(ep["deployment"].to_numpy()).astype(float)
+    lat = np.stack(ep["latent_region"].to_numpy()).astype(float)
+    rec = np.stack(ep["recorded_region"].to_numpy()).astype(float)
+    share = lambda a: a / np.clip(a.sum(1, keepdims=True), 1e-9, None)
+    dep, lat, rec = share(dep), share(lat), share(rec)
+    t0 = max(1, int(burn_in * len(dep)))
+    return float(np.mean([_partial_corr(dep[t - 1], rec[t] - lat[t], lat[t])
+                          for t in range(t0, len(dep))]))
+
+
 def summary_row(df: pd.DataFrame) -> dict:
     traj = feedback_trajectories(df, smooth=1)
     tmax = traj["shift"].max()

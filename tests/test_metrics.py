@@ -166,3 +166,16 @@ def test_hardship_tilted_patrol_shows_positive_incidence():
     r = need_controlled_incidence(df, region, need)
     assert r["hardship"]["coef"] > 0 and r["hardship"]["p"] < 0.01
     assert r["n_clusters"] == 6
+
+
+# ---------------------------------------------------------------- self-induced signal
+def test_self_induced_signal_detects_patrol_driven_recording():
+    from crimesim.eval.feedback_metrics import self_induced_signal
+    rng = np.random.default_rng(0)
+    T, n = 60, 22
+    lat = rng.uniform(5, 15, (T, n))
+    dep = rng.dirichlet(np.ones(n), T)
+    rec = lat.copy()
+    rec[1:] *= 1 + 5 * dep[:-1]                                # yesterday's patrol inflates today's record
+    assert self_induced_signal(_frame(dep, lat, rec)) > 0.5
+    assert abs(self_induced_signal(_frame(dep, lat, 0.6 * lat))) < 1e-6   # detection independent of patrol
