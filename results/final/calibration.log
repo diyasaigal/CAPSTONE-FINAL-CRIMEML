@@ -1,0 +1,10 @@
+=== CrimeGenerator calibration ===
+  Low/Med/High total crime (mean over 8 seeds): 20,270 / 23,896 / 25,786
+  SDT elasticity (Low->High): +27.2%   [v5 reported +42.6%]
+  spatial clustering max/mean: 12.7   nonzero cells: 85.5%
+  night vs day crime rate/shift: 241 vs 217
+    [PASS] sdt_elasticity_pct: 27.2143117025672
+    [PASS] monotonic_low_med_high: (np.float64(20270.125), np.float64(23896.0), np.float64(25786.5))
+    [PASS] spatial_clustering_ratio: 12.686571479186892
+    [PASS] not_degenerate_coverage: 0.8546875
+    [PASS] night_gt_day: (np.float64(241.13333333333333), np.float64(217.26874999999998))
