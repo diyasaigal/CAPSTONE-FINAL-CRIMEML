@@ -1,0 +1,38 @@
+{
+  "lambda_top_over_bottom": 4.4811934967818745,
+  "base": {
+    "elasticity_recorded_u1": 0.19864864864864856,
+    "elasticity_latent_u1": -0.35135135135135137,
+    "oracle_disparity_model": 3.067482282379317,
+    "oracle_disparity_sim": 2.7714216089483763,
+    "beta_max_rec_cov_model": 4.0,
+    "beta_max_rec_cov_sim": 4.0,
+    "beta_max_lat_cov_model": 1.5,
+    "beta_max_lat_cov_sim": 1.5
+  },
+  "const_detect": {
+    "elasticity_recorded_u1": -0.35135135135135137,
+    "elasticity_latent_u1": -0.35135135135135137,
+    "oracle_disparity_model": 3.067482282379317,
+    "oracle_disparity_sim": 2.7714216089483763,
+    "beta_max_rec_cov_model": 3.0,
+    "beta_max_rec_cov_sim": 2.0,
+    "beta_max_lat_cov_model": 3.0,
+    "beta_max_lat_cov_sim": 2.5
+  },
+  "perfect_obs": {
+    "elasticity_recorded_u1": -0.35135135135135137,
+    "elasticity_latent_u1": -0.35135135135135137,
+    "oracle_disparity_model": 3.067482282379317,
+    "oracle_disparity_sim": 2.7714216089483763,
+    "beta_max_rec_cov_model": 3.0,
+    "beta_max_rec_cov_sim": 2.5,
+    "beta_max_lat_cov_model": 3.0,
+    "beta_max_lat_cov_sim": 2.5
+  },
+  "fit": {
+    "r2_log_x_oracle": 0.9820777736808688,
+    "corr": 0.9993008333292264,
+    "mean_abs_log_error": 0.08614377898456667
+  }
+}

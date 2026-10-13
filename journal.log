@@ -1,0 +1,175 @@
+[11:09:23] 39 models in queue, 5 workers
+[12:30:26] train 1/39 ppo_lr1e-3_s1: trained in 80.8 min
+[12:30:35] train 2/39 ppo_lr1e-3_s0: trained in 81.0 min
+[13:16:39] train 3/39 ppo_lr1e-3_s2: trained in 46.2 min
+[13:16:52] train 4/39 ppo_lr1e-4_s0: trained in 46.3 min
+[14:02:22] train 5/39 ppo_long_s1: trained in 172.8 min
+[14:02:39] train 6/39 ppo_long_s0: trained in 173.1 min
+[14:02:43] train 7/39 ppo_lr1e-4_s1: trained in 46.1 min
+[14:02:57] train 8/39 ppo_long_s2: trained in 173.4 min
+[14:03:12] train 9/39 ppo_lr1e-4_s2: trained in 46.3 min
+[14:48:10] train 10/39 ppo_bigbatch_s0: trained in 45.2 min
+[14:48:21] train 11/39 ppo_bigbatch_s1: trained in 45.2 min
+[14:49:07] train 12/39 ppo_ent0_s0: trained in 46.8 min
+[14:49:18] train 13/39 ppo_ent0_s2: trained in 46.6 min
+[14:49:31] train 14/39 ppo_ent0_s1: trained in 46.9 min
+[15:35:49] train 15/39 ppo_bigbatch_s2: trained in 47.6 min
+[15:37:26] train 16/39 abl_low_detect_gain_ppo_400k_s0: trained in 49.1 min
+[15:37:54] train 17/39 abl_low_detect_gain_ppo_400k_s1: trained in 48.8 min
+[15:38:04] train 18/39 abl_low_detect_gain_ppo_400k_s2: trained in 48.8 min
+[15:38:33] train 19/39 abl_high_detect_gain_ppo_400k_s0: trained in 49.0 min
+[16:25:17] train 20/39 abl_high_detect_gain_ppo_400k_s1: trained in 49.5 min
+[16:27:10] train 21/39 abl_high_detect_gain_ppo_400k_s2: trained in 49.7 min
+[16:27:27] train 22/39 abl_low_p_report_ppo_400k_s1: trained in 49.4 min
+[16:27:37] train 23/39 abl_low_p_report_ppo_400k_s0: trained in 49.7 min
+[16:28:12] train 24/39 abl_low_p_report_ppo_400k_s2: trained in 49.6 min
+[17:14:45] train 25/39 abl_high_p_report_ppo_400k_s0: trained in 49.5 min
+[17:16:34] train 26/39 abl_high_p_report_ppo_400k_s1: trained in 49.4 min
+[17:16:34] train 27/39 abl_high_p_report_ppo_400k_s2: trained in 49.1 min
+[17:16:47] train 28/39 abl_weak_deterrence_ppo_400k_s0: trained in 49.2 min
+[17:17:40] train 29/39 abl_weak_deterrence_ppo_400k_s1: trained in 49.5 min
+[19:19:59] 39 models in queue, 4 workers
+[19:20:13] train 1/39 ppo_long_s0: cached in 0.0 min
+[19:20:13] train 2/39 ppo_long_s1: cached in 0.0 min
+[19:20:13] train 3/39 ppo_long_s2: cached in 0.0 min
+[19:20:13] train 4/39 ppo_lr1e-3_s0: cached in 0.0 min
+[19:20:13] train 5/39 ppo_lr1e-3_s1: cached in 0.0 min
+[19:20:13] train 6/39 ppo_lr1e-3_s2: cached in 0.0 min
+[19:20:13] train 7/39 ppo_lr1e-4_s1: cached in 0.0 min
+[19:20:13] train 8/39 ppo_lr1e-4_s0: cached in 0.0 min
+[19:20:13] train 9/39 ppo_lr1e-4_s2: cached in 0.0 min
+[19:20:13] train 10/39 ppo_ent0_s0: cached in 0.0 min
+[19:20:13] train 11/39 ppo_ent0_s1: cached in 0.0 min
+[19:20:13] train 12/39 ppo_ent0_s2: cached in 0.0 min
+[19:20:13] train 13/39 ppo_bigbatch_s0: cached in 0.0 min
+[19:20:13] train 14/39 ppo_bigbatch_s1: cached in 0.0 min
+[19:20:13] train 15/39 ppo_bigbatch_s2: cached in 0.0 min
+[19:20:13] train 16/39 abl_low_detect_gain_ppo_400k_s0: cached in 0.0 min
+[19:20:13] train 17/39 abl_low_detect_gain_ppo_400k_s1: cached in 0.0 min
+[19:20:13] train 18/39 abl_low_detect_gain_ppo_400k_s2: cached in 0.0 min
+[19:20:13] train 19/39 abl_high_detect_gain_ppo_400k_s1: cached in 0.0 min
+[19:20:13] train 20/39 abl_high_detect_gain_ppo_400k_s0: cached in 0.0 min
+[19:20:13] train 21/39 abl_high_detect_gain_ppo_400k_s2: cached in 0.0 min
+[19:20:13] train 22/39 abl_low_p_report_ppo_400k_s0: cached in 0.0 min
+[19:20:13] train 23/39 abl_low_p_report_ppo_400k_s1: cached in 0.0 min
+[19:20:13] train 24/39 abl_low_p_report_ppo_400k_s2: cached in 0.0 min
+[19:20:13] train 25/39 abl_high_p_report_ppo_400k_s0: cached in 0.0 min
+[19:20:13] train 26/39 abl_high_p_report_ppo_400k_s1: cached in 0.0 min
+[19:20:13] train 27/39 abl_weak_deterrence_ppo_400k_s1: cached in 0.0 min
+[19:20:13] train 28/39 abl_high_p_report_ppo_400k_s2: cached in 0.0 min
+[19:20:13] train 29/39 abl_weak_deterrence_ppo_400k_s0: cached in 0.0 min
+[20:17:06] train 30/39 abl_strong_deterrence_ppo_400k_s2: trained in 56.9 min
+[20:18:21] train 31/39 abl_weak_deterrence_ppo_400k_s2: trained in 58.1 min
+[20:18:35] train 32/39 abl_strong_deterrence_ppo_400k_s1: trained in 58.4 min
+[20:18:38] train 33/39 abl_strong_deterrence_ppo_400k_s0: trained in 58.4 min
+[21:06:52] train 34/39 abl_no_socio_obs_ppo_400k_s0: trained in 49.8 min
+[21:07:24] train 35/39 abl_no_socio_obs_ppo_400k_s1: trained in 49.1 min
+[21:07:57] train 36/39 abl_no_socio_obs_ppo_400k_s2: trained in 49.4 min
+[21:08:00] train 37/39 lag_a2.78_s0: trained in 49.4 min
+[21:44:53] train 38/39 lag_a2.78_s1: trained in 38.0 min
+[21:45:12] train 39/39 lag_a2.78_s2: trained in 37.8 min
+[21:45:15] 57 evaluations
+[21:46:24] eval 1/57 ppo_long_s0: ok in 40s
+[21:46:25] eval 2/57 ppo_lr1e-3_s0: ok in 41s
+[21:46:25] eval 3/57 ppo_long_s2: ok in 41s
+[21:46:25] eval 4/57 ppo_long_s1: ok in 41s
+[21:46:57] eval 5/57 ppo_lr1e-3_s1: ok in 33s
+[21:46:58] eval 6/57 ppo_lr1e-4_s0: ok in 33s
+[21:46:59] eval 7/57 ppo_lr1e-3_s2: ok in 34s
+[21:46:59] eval 8/57 ppo_lr1e-4_s1: ok in 34s
+[21:47:35] eval 9/57 ppo_lr1e-4_s2: ok in 38s
+[21:47:35] eval 10/57 ppo_ent0_s0: ok in 38s
+[21:47:37] eval 11/57 ppo_ent0_s1: ok in 38s
+[21:47:37] eval 12/57 ppo_ent0_s2: ok in 38s
+[21:48:15] eval 13/57 ppo_bigbatch_s1: ok in 40s
+[21:48:16] eval 14/57 ppo_bigbatch_s0: ok in 40s
+[21:48:17] eval 15/57 ppo_bigbatch_s2: ok in 41s
+[21:48:18] eval 16/57 lag_a2.78_s0: ok in 41s
+[21:48:30] eval 17/57 ppo_long_s0@100000: ok in 12s
+[21:48:31] eval 18/57 ppo_long_s0@1000000: ok in 13s
+[21:48:42] eval 19/57 ppo_long_s0@1100000: ok in 12s
+[21:48:43] eval 20/57 ppo_long_s0@1200000: ok in 12s
+[21:48:51] eval 21/57 lag_a2.78_s1: ok in 35s
+[21:48:52] eval 22/57 lag_a2.78_s2: ok in 36s
+[21:48:54] eval 23/57 ppo_long_s0@300000: ok in 11s
+[21:48:54] eval 24/57 ppo_long_s0@200000: ok in 12s
+[21:49:03] eval 25/57 ppo_long_s0@400000: ok in 12s
+[21:49:04] eval 26/57 ppo_long_s0@500000: ok in 12s
+[21:49:06] eval 27/57 ppo_long_s0@600000: ok in 12s
+[21:49:06] eval 28/57 ppo_long_s0@700000: ok in 13s
+[21:49:14] eval 29/57 ppo_long_s0@800000: ok in 11s
+[21:49:15] eval 30/57 ppo_long_s0@900000: ok in 12s
+[21:49:17] eval 31/57 ppo_long_s1@100000: ok in 11s
+[21:49:17] eval 32/57 ppo_long_s1@1000000: ok in 11s
+[21:49:25] eval 33/57 ppo_long_s1@1100000: ok in 11s
+[21:49:27] eval 34/57 ppo_long_s1@1200000: ok in 12s
+[21:49:28] eval 35/57 ppo_long_s1@200000: ok in 11s
+[21:49:28] eval 36/57 ppo_long_s1@300000: ok in 11s
+[21:49:37] eval 37/57 ppo_long_s1@400000: ok in 12s
+[21:49:38] eval 38/57 ppo_long_s1@500000: ok in 11s
+[21:49:40] eval 39/57 ppo_long_s1@600000: ok in 12s
+[21:49:40] eval 40/57 ppo_long_s1@700000: ok in 12s
+[21:49:49] eval 41/57 ppo_long_s1@900000: ok in 11s
+[21:49:49] eval 42/57 ppo_long_s1@800000: ok in 12s
+[21:49:50] eval 43/57 ppo_long_s2@100000: ok in 10s
+[21:49:51] eval 44/57 ppo_long_s2@1000000: ok in 11s
+[21:50:00] eval 45/57 ppo_long_s2@1100000: ok in 11s
+[21:50:01] eval 46/57 ppo_long_s2@1200000: ok in 12s
+[21:50:03] eval 47/57 ppo_long_s2@200000: ok in 13s
+[21:50:03] eval 48/57 ppo_long_s2@300000: ok in 12s
+[21:50:14] eval 49/57 ppo_long_s2@400000: ok in 14s
+[21:50:15] eval 50/57 ppo_long_s2@500000: ok in 14s
+[21:50:16] eval 51/57 ppo_long_s2@600000: ok in 14s
+[21:50:17] eval 52/57 ppo_long_s2@700000: ok in 14s
+[21:50:28] eval 53/57 ppo_long_s2@800000: ok in 13s
+[21:50:28] eval 54/57 ppo_long_s2@900000: ok in 13s
+[21:50:29] eval 55/57 ppo_s0: ok in 13s
+[21:50:29] eval 56/57 ppo_s1: ok in 12s
+[21:50:36] eval 57/57 ppo_s2: ok in 9s
+[21:50:38] sensitivity evaluation (eval seeds 300-319, own-variant oracle)
+abl_base_ppo_400k_s0: train 0s, eval 0s
+abl_base_ppo_400k_s1: train 0s, eval 0s
+abl_base_ppo_400k_s2: train 0s, eval 0s
+abl_low_detect_gain_ppo_400k_s0: train 0s, eval 17s
+abl_low_detect_gain_ppo_400k_s1: train 0s, eval 13s
+abl_low_detect_gain_ppo_400k_s2: train 0s, eval 14s
+abl_high_detect_gain_ppo_400k_s0: train 0s, eval 14s
+abl_high_detect_gain_ppo_400k_s1: train 0s, eval 13s
+abl_high_detect_gain_ppo_400k_s2: train 0s, eval 14s
+abl_low_p_report_ppo_400k_s0: train 0s, eval 14s
+abl_low_p_report_ppo_400k_s1: train 0s, eval 17s
+abl_low_p_report_ppo_400k_s2: train 0s, eval 15s
+abl_high_p_report_ppo_400k_s0: train 0s, eval 14s
+abl_high_p_report_ppo_400k_s1: train 0s, eval 14s
+abl_high_p_report_ppo_400k_s2: train 0s, eval 14s
+abl_weak_deterrence_ppo_400k_s0: train 0s, eval 14s
+abl_weak_deterrence_ppo_400k_s1: train 0s, eval 15s
+abl_weak_deterrence_ppo_400k_s2: train 0s, eval 15s
+abl_strong_deterrence_ppo_400k_s0: train 0s, eval 14s
+abl_strong_deterrence_ppo_400k_s1: train 0s, eval 14s
+abl_strong_deterrence_ppo_400k_s2: train 0s, eval 14s
+D:\PES\CapStone\sem7\CrimeML\crimesim\eval\stats.py:72: RuntimeWarning: invalid value encountered in sqrt
+  se = np.sqrt(np.diag(cov))
+abl_no_socio_obs_ppo_400k_s0: train 0s, eval 14s
+abl_no_socio_obs_ppo_400k_s1: train 0s, eval 13s
+abl_no_socio_obs_ppo_400k_s2: train 0s, eval 14s
+
+== E5 (400k, eval e300n20): disparity x own-variant GreedyOracle ==
+          variant   kind  n_train_seeds  n_eval_seeds  x_ref  x_ref_lo  x_ref_hi  disparity  lat_cov  proxy_gap  rec_distortion  hardship_t
+             base oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.003           1.597         NaN
+             base    ppo              3            20  4.923     4.050     5.920     14.816    0.048      0.021           2.007       9.183
+  low_detect_gain oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.002           1.353         NaN
+  low_detect_gain    ppo              3            20  3.469     2.999     3.980     10.220    0.049      0.010           1.480      11.454
+ high_detect_gain oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.003           1.597         NaN
+ high_detect_gain    ppo              3            20  5.617     4.450     7.126     16.995    0.048      0.024           2.255       8.493
+     low_p_report oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.004           1.842         NaN
+     low_p_report    ppo              3            20  8.073     7.240     9.041     23.695    0.047      0.039           3.148       8.163
+    high_p_report oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.002           1.371         NaN
+    high_p_report    ppo              3            20  3.203     2.616     3.828      9.464    0.049      0.011           1.486       5.729
+  weak_deterrence oracle              1            20  1.000     1.000     1.000      3.388    0.057      0.004           1.666         NaN
+  weak_deterrence    ppo              3            20  9.055     7.903    10.285     31.284    0.055      0.031           2.395      14.880
+strong_deterrence oracle              1            20  1.000     1.000     1.000      2.687    0.053      0.003           1.577         NaN
+strong_deterrence    ppo              3            20  5.517     4.204     6.818     15.929    0.048      0.022           2.064       6.890
+     no_socio_obs oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.003           1.597         NaN
+     no_socio_obs    ppo              3            20  4.406     3.948     4.986     12.913    0.048      0.020           1.986       7.626
+[21:58:24] done; failed: none

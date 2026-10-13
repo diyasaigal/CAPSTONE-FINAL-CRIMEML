@@ -132,6 +132,7 @@ class RLConfig:
     n_envs: int = 8
     extractor: str = "mlp"            # "mlp" | "gnn"
     seed: int = 0
+    checkpoint_every: int = 0         # >0: save a snapshot every this many steps (learning curves)
 
 
 @dataclass

@@ -1,0 +1,8 @@
+{
+  "n_models": 20,
+  "spearman_reward_vs_log_disparity": 0.9578947368421054,
+  "p": 3.389666746806415e-11,
+  "n_snapshots": 36,
+  "spearman_snapshots": 0.901930501930502,
+  "p_snapshots": 5.990938373928574e-14
+}

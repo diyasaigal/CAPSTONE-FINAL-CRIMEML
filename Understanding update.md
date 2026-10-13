@@ -122,9 +122,7 @@ We followed the 8-phase plan in order. Nothing in the simulator, the detection m
 - The 5 PPO training runs range from **2.6× to 5.3×**. The AI is unstable, and we report that openly.
 - **What PPO learned:** β ≈ **3.1** (chase hot spots hard), w ≈ **+1.28** (an extra deliberate push toward poor districts), μ ≈ **0.14** (almost no even split).
 
-**The old headline changed:** 3.7× (old data) → **3.9×** (final). The earlier 2.8× was from just 2 runs.
-
-### Is it the AI, or the goal? (fixed-rule search)
+**The old headline changed:** 3.7× (old data) → **3.9×** (final). The e=
 
 We tried **192 fixed dial settings** with no AI involved.
 
@@ -276,9 +274,87 @@ Never type numbers into the paper by hand. Rerun these scripts instead.
 
 ---
 
-## 9. What's left
+## 9. Journal-readiness work (2026-10-11)
 
-- [ ] Compile the paper in **Overleaf** (no LaTeX on the laptop). Upload `main.tex`, `refs.bib`, `numbers.tex`, `tables/` and the figure PDFs into one folder.
+The team approved seven steps to make the paper ready for a journal (JAAMAS). All seven are done.
+
+### What changed in the paper
+
+- **Reframed.** The paper is now about *optimising a self-contaminated proxy*. PPO is the main case study; PredPol and the fixed-rule search are other optimisers of the same proxy.
+- **Springer format.** `paper/main.tex` is now the Springer (JAAMAS) version, 21 pages. `paper/main_ieee.tex` is the IEEE version. Both include the same `abstract.tex` and `body.tex`, so the text is edited in one place.
+- **Compiles locally.** Tectonic is installed at `~/tools/tectonic/tectonic.exe`; Overleaf is no longer needed to check.
+
+### New result 1: a small maths model of the loop
+
+`crimesim/theory.py` solves for where a patrol rule settles when its input depends on its own output. The key quantity is the *elasticity* ε: how much the recorded signal rises when patrol rises by 1%.
+
+- In our base setting ε = +0.20. Detection pushes it up by 0.55; deterrence pulls it down by 0.35.
+- With constant detection ε = −0.35, so the loop damps itself.
+- The model matches the full simulator within 2% on average (7% worst case) over 16 rule–setting pairs.
+- It also shows why the bias appears: recorded coverage (the reward) keeps rising as patrol concentrates, after true-crime coverage has already peaked.
+
+### New result 2: is PPO just badly trained? (No — better training makes it worse)
+
+| Setting (3 seeds each) | × oracle | Recorded coverage (reward) |
+|---|---|---|
+| Default, 400k steps | 4.85 | 0.0689 |
+| Default, 1.2M steps | 3.88 | 0.0680 |
+| Learning rate 0.001 | 2.30 | 0.0629 |
+| Learning rate 0.0001 | 8.17 | 0.0722 |
+| No entropy bonus | 3.86 | 0.0667 |
+| Bigger rollouts (8192 steps) | 7.93 | 0.0706 |
+| Best fixed rule (no RL) | 13.04 | 0.0746 |
+
+- Training three times longer does **not** raise the reward; PPO plateaus by 400k steps.
+- Across all 20 trained models, more reward goes with more disparity (rank correlation 0.96).
+- The best single model reaches reward 0.0741 at 12.0× the oracle, almost exactly the fixed rule.
+- So our headline 3.9× is on the low side: a better optimiser of this reward is more unfair, not less.
+
+### New result 3: sensitivity to the made-up parameters
+
+Naive PPO retrained in seven changed settings (3 seeds each), each compared with its own oracle.
+
+| Setting | ε (model) | PPO × own oracle |
+|---|---|---|
+| Base | +0.20 | 4.9 |
+| Detection gain 0.25 | +0.01 | 3.5 |
+| Detection gain 0.80 | +0.29 | 5.6 |
+| Baseline reporting 0.15 | +0.36 | 8.1 |
+| Baseline reporting 0.50 | +0.07 | 3.2 |
+| Deterrence slope 0.10 | +0.44 | 9.1 |
+| Deterrence slope 0.30 | +0.12 | 5.5 |
+| No socio-economic inputs | +0.20 | 4.4 |
+
+- PPO is above the oracle in **every** setting (lowest confidence bound 2.6×).
+- The size follows the model's ε (rank correlation 0.93). One exception: stronger deterrence did not come out below base.
+- Removing the hardship inputs barely matters, so the skew comes from recorded crime itself.
+
+### New result 4: the reference does not drive the conclusion
+
+- PPO is 3.9× the oracle, 10.8× Uniform, 2.8× the PredPol-like rule and 1.75× the rule with the best true-crime coverage. The ordering of policies is the same under every reference.
+- Without any reference: the poorest fifth of districts gets 2.75 times its share of true crime under PPO, against 0.96 under the oracle.
+
+### New result 5: Lagrangian check
+
+Lagrangian PPO with the disparity ceiling set at the oracle's level lands on target (1.04× the oracle, CI 0.90–1.18), but covers less true crime (0.0460) than the oracle-targeted penalty (0.0490).
+
+### New files
+
+| What | Where |
+|---|---|
+| Maths model + tests | `crimesim/theory.py`, `tests/test_theory.py` |
+| Training queue for all the new runs | `scripts/journal_runs.py` |
+| Summaries | `scripts/summarise_journal.py`, `scripts/analytic_model.py`, `scripts/reference_robustness.py` |
+| Figures, tables, numbers | `scripts/make_journal_assets.py` → `figures/fig_theory`, `fig_optimisation`, `fig_sensitivity`; `paper/tables/`; `paper/numbers_journal.tex` |
+| Results | `results/journal/`, `results/theory/`, `results/e5_400k_e300n20_sens.csv` |
+
+To regenerate the journal additions, run `summarise_journal.py`, then `make_journal_assets.py`, then `check_paper.py`.
+
+---
+
+## 10. What's left
+
+- [ ] Team fills the placeholders in `paper/main.tex`: corresponding author and email, funding, competing interests, author contributions, repository link.
 - [ ] Team reads and edits the new draft.
-- [ ] Set up a shared **git remote** so everyone can see the `pivot` branch.
-- [ ] Optional: more training runs to tighten the error bars; the Lagrangian method as a robustness check.
+- [ ] Commit this work and set up a shared **git remote** so everyone can see the `pivot` branch.
+- [ ] Still open for a reviewer: no real-data check, quintiles of only 4–5 districts, uniform population.

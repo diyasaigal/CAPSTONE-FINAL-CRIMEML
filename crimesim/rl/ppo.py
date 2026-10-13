@@ -10,6 +10,7 @@ from pathlib import Path
 
 import numpy as np
 from stable_baselines3 import PPO
+from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecNormalize
 
@@ -48,7 +49,10 @@ def train_ppo(cfg: Config, *, save_dir: str | Path | None = None, verbose: int =
         policy_kwargs=dict(net_arch=[128, 128]),
         seed=rl.seed, verbose=verbose,
     )
-    model.learn(total_timesteps=rl.total_timesteps, progress_bar=False)
+    cb = None
+    if rl.checkpoint_every > 0 and save_dir is not None:
+        cb = SnapshotCallback(rl.checkpoint_every, Path(save_dir) / "checkpoints")
+    model.learn(total_timesteps=rl.total_timesteps, callback=cb, progress_bar=False)
 
     if save_dir is not None:
         save_dir = Path(save_dir); save_dir.mkdir(parents=True, exist_ok=True)
@@ -56,6 +60,23 @@ def train_ppo(cfg: Config, *, save_dir: str | Path | None = None, verbose: int =
         save_obs_rms(venv, save_dir / "obs_rms.npz")
         cfg.save(save_dir / "config.yaml")
     return model, venv
+
+
+class SnapshotCallback(BaseCallback):
+    """Save model + observation statistics to ``<dir>/<steps>/`` every ``every`` steps."""
+
+    def __init__(self, every: int, out_dir: Path):
+        super().__init__()
+        self.every, self.out_dir, self._next = every, Path(out_dir), every
+
+    def _on_step(self) -> bool:
+        if self.num_timesteps >= self._next:
+            d = self.out_dir / str(self._next)
+            d.mkdir(parents=True, exist_ok=True)
+            self.model.save(d / "ppo_model")
+            save_obs_rms(self.model.get_env(), d / "obs_rms.npz")
+            self._next += self.every
+        return True
 
 
 def save_obs_rms(venv: VecNormalize, path) -> None:

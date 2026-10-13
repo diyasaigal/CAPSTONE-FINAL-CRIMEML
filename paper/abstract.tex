@@ -1,0 +1,23 @@
+A system that acts on the world and is then scored on what it observes can write
+part of its own objective. In patrol allocation, patrolling a district raises
+the fraction of its crime that is recorded, and recorded crime is both the input
+and the success measure of the next allocation. We study what happens when such
+a \emph{self-contaminated proxy} is optimised, using an agent-based crime
+simulator that is never seeded with historical crime, so latent crime is known
+everywhere. Policies set the parameters of an allocation rule and are rewarded
+for covering \emph{recorded} crime; each is scored against a need-proportional
+reference on the same simulator seeds. A reinforcement-learning agent (PPO)
+places \nPPOx$\times$ the reference's patrol disparity on the most disadvantaged
+districts (95\% CI \nPPOxLo--\nPPOxHi) while covering less true crime than the
+reference, and a non-learning search that maximises the same proxy is more
+skewed still (\nBRRx$\times$): the bias belongs to the objective, and better
+optimisation makes it worse. A mean-field model of the loop explains why.
+Patrol-dependent recording makes the recorded signal rise with patrol, which
+amplifies the tilt of any allocation rule and keeps the proxy reward increasing
+with concentration after true-crime coverage has peaked; the model reproduces
+the simulator's disparities to within \nThDispErr\% on average. Removing the
+dependence of detection on patrol cuts PPO's excess from \nEfiveBase$\times$ to
+\nEfiveConst$\times$. Parity penalties overcorrect and under-patrol the
+districts with the most crime, whereas a penalty targeted at the
+need-proportional reference lands closest to it while raising true-crime
+coverage.

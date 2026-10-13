@@ -1,4 +1,7 @@
-"""Pivot Phase 8: static checks on paper/main.tex (no LaTeX install needed).
+"""Pivot Phase 8: static checks on the paper sources (no LaTeX install needed).
+
+Checks abstract.tex + body.tex, which both wrappers (main.tex for Springer,
+main_ieee.tex for IEEEtran) include, plus the wrappers themselves.
 
   * every \\input, \\includegraphics, \\cite, \\ref and \\n<Number> macro resolves
   * environments are balanced
@@ -13,7 +16,8 @@ import sys
 from pathlib import Path
 
 PAPER = Path("paper")
-TEX = (PAPER / "main.tex").read_text(encoding="utf-8")
+TEX = "\n".join((PAPER / f).read_text(encoding="utf-8")
+                for f in ("main.tex", "main_ieee.tex", "abstract.tex", "body.tex"))
 BODY = re.sub(r"(?<!\\)%.*", "", TEX)                       # drop comments
 fails = []
 
@@ -23,7 +27,7 @@ def check(cond, msg):
         fails.append(msg)
 
 
-for f in re.findall(r"\\input\{([^}]+)\}", BODY):
+for f in re.findall(r"\\(?:tab)?input\{([^}#]+)\}", BODY):
     path = PAPER / (f if f.endswith(".tex") else f + ".tex")
     check(path.exists(), f"missing \\input file {path}")
 for f in re.findall(r"\\includegraphics(?:\[[^]]*\])?\{([^}]+)\}", BODY):
@@ -36,22 +40,34 @@ for group in re.findall(r"\\cite\{([^}]+)\}", BODY):
         check(k.strip() in keys, f"unknown citation {k.strip()}")
 
 labels = set(re.findall(r"\\label\{([^}]+)\}", BODY))
-for r in re.findall(r"\\ref\{([^}]+)\}", BODY):
+refs = set(re.findall(r"\\(?:eq)?ref\{([^}]+)\}", BODY))
+for r in refs:
     check(r in labels, f"undefined reference {r}")
-for l in labels:
-    check(f"\\ref{{{l}}}" in BODY, f"label never referenced: {l}")
+for l in labels - refs:
+    check(False, f"label never referenced: {l}")
 
-defined = set(re.findall(r"\\newcommand\{\\(n[A-Za-z]+)\}", (PAPER / "numbers.tex").read_text()))
-for m in set(re.findall(r"\\(n[A-Z][A-Za-z]*)", BODY)):
+defined = set(re.findall(r"\\newcommand\{\\(n[A-Za-z]+)\}",
+                         (PAPER / "numbers.tex").read_text() + (PAPER / "numbers_journal.tex").read_text()))
+for m in set(re.findall(r"\\(n[A-Z][A-Za-z]*)", BODY)) - {"newsavebox"}:
     check(m in defined, f"undefined number macro \\{m}")
 
 for env in set(re.findall(r"\\begin\{([^}]+)\}", BODY)):
     check(BODY.count(f"\\begin{{{env}}}") == BODY.count(f"\\end{{{env}}}"), f"unbalanced environment {env}")
 check(BODY.count("{") == BODY.count("}"), "unbalanced braces")
 
-src = max(p.stat().st_mtime for p in Path("results/final").glob("*.csv"))
+JOURNAL_TABLES = {"reference.tex", "optimisation.tex", "sensitivity.tex"}
+src = max(p.stat().st_mtime for p in Path("results/final").glob("e*.csv"))
 for p in [PAPER / "numbers.tex", *PAPER.glob("tables/*.tex")]:
-    check(p.stat().st_mtime >= src, f"{p} is older than results/final; rerun make_paper_assets.py")
+    if p.name not in JOURNAL_TABLES:
+        check(p.stat().st_mtime >= src, f"{p} is older than results/final; rerun make_paper_assets.py")
+jsrc = [q for d in ("results/journal", "results/theory") for q in Path(d).glob("*.csv")]
+jsrc += [Path("results/final") / f for f in ("reference_robustness.csv", "reference_free.csv")]
+jsrc = max(q.stat().st_mtime for q in jsrc if q.exists())
+for p in [PAPER / "numbers_journal.tex", *(PAPER / "tables" / t for t in JOURNAL_TABLES)]:
+    if p.exists():
+        check(p.stat().st_mtime >= jsrc, f"{p} is older than its results; rerun make_journal_assets.py")
+check("%%" not in "".join(l for l in TEX.splitlines() if l.startswith("%%") and l.rstrip().endswith("%%")),
+      "unfilled %%PLACEHOLDER%% left in the paper")
 
 # numbers from the pre-pivot draft that must not survive (F1: seed-2-only values)
 for stale in ["8.1 (20.8)", "0.064", "3.7$\\times$", "p < 10^{-300}$, $R^2", "ten held-out", "upper bound"]:

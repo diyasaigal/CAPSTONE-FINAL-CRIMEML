@@ -1,0 +1,69 @@
+%=========================================================================
+%  IEEEtran two-column version (conference / capstone report).
+%  The journal version is main.tex. Both include abstract.tex and body.tex.
+%  Overleaf: upload the whole paper/ folder plus figures/ (next to the .tex
+%  files). Compiler: pdfLaTeX. Set main_ieee.tex as the main document.
+%=========================================================================
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\graphicspath{{./}{../}}   % figures/ next to the .tex files (Overleaf) or at the repo root
+\input{numbers}
+\input{numbers_journal}
+% \input is not expandable, which breaks \bottomrule after a table body; use the primitive
+\makeatletter\newcommand{\tabinput}[1]{\@@input #1.tex }\makeatother
+\newenvironment{widefigure}{\begin{figure*}[t]\centering}{\end{figure*}}
+\newenvironment{widetable}{\begin{table*}[t]\centering}{\end{table*}}
+\newenvironment{landtable}{\begin{table*}[t]\centering}{\end{table*}}
+\newsavebox{\fitboxbox}
+\newenvironment{fitbox}{\begin{lrbox}{\fitboxbox}}{\end{lrbox}%
+  \ifdim\wd\fitboxbox>\linewidth \resizebox{\linewidth}{!}{\usebox{\fitboxbox}}%
+  \else \usebox{\fitboxbox}\fi}   % shrink a table only if it is wider than the column
+\newcommand{\archwidth}{0.82\textwidth}
+\newcommand{\widefigwidth}{0.9\textwidth}
+\newcommand{\narrowfigwidth}{\linewidth}
+
+\begin{document}
+
+\title{Optimising a Self-Contaminated Proxy:\
+Patrol-Allocation Bias in a Crime Simulator\
+with Known Ground Truth}
+
+\author{
+\IEEEauthorblockN{Ashmith Reddy Sama, Dennis Philip, Dhrithi Kiran, Diya Saigal}
+\IEEEauthorblockA{Department of Computer Science and Engineering (AI \& ML)\
+PES University, Bengaluru, India}
+\and
+\IEEEauthorblockN{Bhaskarjyoti Das}
+\IEEEauthorblockA{Department of Computer Science and Engineering (AI \& ML)\
+PES University, Bengaluru, India}
+}
+
+\maketitle
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\begin{IEEEkeywords}
+feedback loops, proxy objectives, reinforcement learning, performative
+prediction, algorithmic fairness, predictive policing, agent-based simulation
+\end{IEEEkeywords}
+
+\input{body}
+
+\section*{Acknowledgment}
+We thank PES University and the Department of Computer Science and Engineering
+(AI \& ML). This work was carried out as Capstone Project Phase 2 (UE23AM320B).
+
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\end{document}

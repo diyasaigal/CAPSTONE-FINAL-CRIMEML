@@ -1,0 +1,873 @@
+[11:04:53] 39 models in queue, 8 workers
+Exception ignored in: <function _get_module_lock.<locals>.cb at 0x000002887FC9F1A0>
+Traceback (most recent call last):
+  File "<frozen importlib._bootstrap>", line 1173, in _find_and_load
+MemoryError: 
+[11:05:09] train 1/39 ppo_lr1e-4_s1: FAILED in 0.0 min
+[11:05:09] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:09] train 2/39 ppo_lr1e-3_s1: FAILED in 0.0 min
+[11:05:09] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:10] train 3/39 ppo_long_s1: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:10] train 4/39 ppo_lr1e-3_s0: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:10] train 5/39 ppo_lr1e-4_s0: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:10] train 6/39 ppo_ent0_s0: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.57 MiB for an array with shape (256, 8, 201) and data type float32
+
+[11:05:10] train 7/39 ppo_lr1e-3_s2: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 3, in <module>
+    import sympy
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\sympy\__init__.py", line 23, in <module>
+    import mpmath
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\__init__.py", line 5, in <module>
+    from .ctx_fp import FPContext
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\ctx_fp.py", line 1, in <module>
+    from .ctx_base import StandardBaseContext
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\ctx_base.py", line 3, in <module>
+    from .libmp.backend import xrange
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\libmp\__init__.py", line 1, in <module>
+    from .libmpf import (prec_to_dps, dps_to_prec, repr_dps,
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1138, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1078, in _find_spec
+  File "<frozen importlib._bootstrap_external>", line 1507, in find_spec
+  File "<frozen importlib._bootstrap_external>", line 1479, in _get_spec
+  File "<frozen importlib._bootstrap_external>", line 1643, in find_spec
+MemoryError
+
+[11:05:10] train 8/39 ppo_long_s0: FAILED in 0.0 min
+[11:05:10] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 3, in <module>
+    import sympy
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\sympy\__init__.py", line 23, in <module>
+    import mpmath
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\__init__.py", line 5, in <module>
+    from .ctx_fp import FPContext
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\ctx_fp.py", line 1, in <module>
+    from .ctx_base import StandardBaseContext
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\ctx_base.py", line 3, in <module>
+    from .libmp.backend import xrange
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\libmp\__init__.py", line 1, in <module>
+    from .libmpf import (prec_to_dps, dps_to_prec, repr_dps,
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\mpmath\libmp\libmpf.py", line 20, in <module>
+    from .libintmath import (giant_steps,
+  File "<frozen importlib._bootstrap>", line 1173, in _find_and_load
+MemoryError
+
+[11:05:11] train 9/39 ppo_ent0_s2: FAILED in 0.0 min
+[11:05:11] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.57 MiB for an array with shape (256, 8, 201) and data type float32
+
+[11:05:11] train 10/39 ppo_ent0_s1: FAILED in 0.0 min
+[11:05:11] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.57 MiB for an array with shape (256, 8, 201) and data type float32
+
+[11:05:11] train 11/39 ppo_bigbatch_s0: FAILED in 0.0 min
+[11:05:11] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 6.28 MiB for an array with shape (1024, 8, 201) and data type float32
+
+[11:05:11] train 12/39 ppo_bigbatch_s1: FAILED in 0.0 min
+[11:05:11] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 6.28 MiB for an array with shape (1024, 8, 201) and data type float32
+
+[11:05:12] train 13/39 ppo_bigbatch_s2: FAILED in 0.0 min
+[11:05:12] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 6.28 MiB for an array with shape (1024, 8, 201) and data type float32
+
+[11:05:12] train 14/39 abl_low_detect_gain_ppo_400k_s0: FAILED in 0.0 min
+[11:05:12] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 125, in _setup_model
+    self.rollout_buffer = self.rollout_buffer_class(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 389, in __init__
+    self.reset()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\buffers.py", line 392, in reset
+    self.observations = np.zeros((self.buffer_size, self.n_envs, *self.obs_shape), dtype=self.observation_space.dtype)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+numpy._core._exceptions._ArrayMemoryError: Unable to allocate 1.57 MiB for an array with shape (256, 8, 201) and data type float32
+
+[11:05:12] train 15/39 ppo_long_s2: FAILED in 0.1 min
+[11:05:12] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 3, in <module>
+    import sympy
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\sympy\__init__.py", line 77, in <module>
+    from .polys import (Poly, PurePoly, poly_from_expr, parallel_poly_from_expr,
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\sympy\polys\__init__.py", line 68, in <module>
+    from .polytools import (Poly, PurePoly, poly_from_expr,
+  File "<frozen importlib._bootstrap>", line 1176, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1147, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 690, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 936, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1032, in get_code
+  File "<frozen importlib._bootstrap_external>", line 1131, in get_data
+MemoryError
+
+[11:05:15] train 16/39 abl_low_p_report_ppo_400k_s1: FAILED in 0.0 min
+[11:05:15] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+
+[11:05:16] train 17/39 abl_low_p_report_ppo_400k_s2: FAILED in 0.0 min
+[11:05:16] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+
+[11:05:17] train 18/39 abl_high_p_report_ppo_400k_s0: FAILED in 0.0 min
+[11:05:17] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+
+[11:05:18] train 19/39 abl_high_p_report_ppo_400k_s1: FAILED in 0.0 min
+[11:05:18] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+
+[11:05:19] train 20/39 abl_high_p_report_ppo_400k_s2: FAILED in 0.0 min
+[11:05:19] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+
+[11:05:21] train 21/39 abl_weak_deterrence_ppo_400k_s0: FAILED in 0.0 min
+[11:05:21] Traceback (most recent call last):
+  File "D:\PES\CapStone\sem7\CrimeML\scripts\journal_runs.py", line 77, in _train
+    ensure_trained(name, cfg, algo)
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\crimesim\rl\ppo.py", line 44, in train_ppo
+    model = PPO(
+            ^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 171, in __init__
+    self._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 174, in _setup_model
+    super()._setup_model()
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 135, in _setup_model
+    self.policy = self.policy_class(  # type: ignore[assignment]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 535, in __init__
+    self._build(lr_schedule)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\stable_baselines3\common\policies.py", line 634, in _build
+    self.optimizer = self.optimizer_class(self.parameters(), lr=lr_schedule(1), **self.optimizer_kwargs)  # type: ignore[call-arg]
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\adam.py", line 102, in __init__
+    super().__init__(params, defaults)
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\optim\optimizer.py", line 424, in __init__
+    self.add_param_group(cast(dict[str, Any], param_group))
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_compile.py", line 47, in inner
+    import torch._dynamo
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\aot_compile.py", line 17, in <module>
+    from torch._dynamo.convert_frame import GraphRuntimeEnv
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\convert_frame.py", line 62, in <module>
+    from torch._dynamo.symbolic_convert import TensorifyState
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\symbolic_convert.py", line 54, in <module>
+    from torch._dynamo.exc import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\exc.py", line 72, in <module>
+    from .utils import counters
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\_dynamo\utils.py", line 68, in <module>
+    import torch.fx.experimental.symbolic_shapes
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 80, in <module>
+    from torch.utils._sympy.functions import (
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\functions.py", line 24, in <module>
+    from .numbers import int_oo, IntInfinity, is_infinite
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 14, in <module>
+    class IntInfinity(Number, metaclass=Singleton):
+  File "D:\PES\CapStone\sem7\CrimeML\.venv-win\Lib\site-packages\torch\utils\_sympy\numbers.py", line 160, in IntInfinity
+    def __gt__(self, other: sympy.Expr) -> sympy.logic.boolalg.BooleanAtom:
+                                           ^^^^^^^^^^^
+AttributeError: module 'sympy' has no attribute 'logic'
+

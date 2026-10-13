@@ -1,0 +1,135 @@
+[11:20:34] GreedyOracle reference disparity (per shift, seeds 1000-1009): 2.7806
+[11:20:34] 51 models in queue, 6 workers
+[11:20:42] train 1/51 abl_base_ppo_400k_s0: cached in 0.0 min
+[12:36:30] train 2/51 abl_base_ppo_400k_s1: trained in 75.8 min
+[12:36:43] train 3/51 abl_perfect_obs_ppo_400k_s0: trained in 76.0 min
+[12:37:03] train 4/51 abl_base_fair_400k_s2: trained in 76.3 min
+[12:37:05] train 5/51 abl_base_ppo_400k_s2: trained in 76.4 min
+[12:37:09] train 6/51 abl_base_fair_400k_s1: trained in 76.4 min
+[12:37:30] train 7/51 abl_base_fair_400k_s0: trained in 76.8 min
+[13:49:22] train 8/51 abl_perfect_obs_ppo_400k_s1: trained in 72.9 min
+[13:49:41] train 9/51 abl_perfect_obs_ppo_400k_s2: trained in 73.0 min
+[13:50:18] train 10/51 abl_perfect_obs_fair_400k_s0: trained in 73.2 min
+[13:50:35] train 11/51 abl_perfect_obs_fair_400k_s2: trained in 73.4 min
+[13:51:00] train 12/51 abl_perfect_obs_fair_400k_s1: trained in 73.9 min
+[13:51:15] train 13/51 abl_const_detect_ppo_400k_s0: trained in 73.8 min
+[15:20:44] train 14/51 abl_const_detect_ppo_400k_s1: trained in 91.4 min
+[15:21:08] train 15/51 abl_const_detect_ppo_400k_s2: trained in 91.5 min
+[15:23:24] train 16/51 abl_const_detect_fair_400k_s0: trained in 93.1 min
+[15:24:22] train 17/51 abl_const_detect_fair_400k_s1: trained in 93.8 min
+[15:26:44] train 18/51 ppo_s0: trained in 95.5 min
+[15:26:52] train 19/51 abl_const_detect_fair_400k_s2: trained in 95.9 min
+[18:04:01] train 20/51 ppo_oracle_s0: trained in 163.3 min
+[18:04:14] train 21/51 pen_p0.02_s0: trained in 163.1 min
+[18:05:41] train 22/51 pen_p0.06_s0: trained in 162.3 min
+[18:06:04] train 23/51 pen_p0.15_s0: trained in 161.7 min
+[18:07:33] train 24/51 pen_p0.4_s0: trained in 160.8 min
+[18:07:35] train 25/51 ppo_s1: trained in 160.7 min
+[19:40:30] train 26/51 ppo_oracle_s1: trained in 96.5 min
+[19:40:52] train 27/51 pen_p0.02_s1: trained in 96.6 min
+[19:45:26] train 28/51 pen_p0.15_s1: trained in 99.4 min
+[19:45:48] train 29/51 pen_p0.06_s1: trained in 100.1 min
+[19:48:54] train 30/51 pen_p0.4_s1: trained in 101.4 min
+[19:49:09] train 31/51 ppo_s2: trained in 101.6 min
+[22:06:17] train 32/51 ppo_oracle_s2: trained in 145.8 min
+[22:06:23] train 33/51 pen_p0.02_s2: trained in 145.5 min
+[22:09:05] train 34/51 pen_p0.15_s2: trained in 143.3 min
+[22:09:10] train 35/51 pen_p0.06_s2: trained in 143.7 min
+[22:10:44] train 36/51 pen_p0.4_s2: trained in 141.8 min
+[22:11:12] train 37/51 ppo_obslat_s0: trained in 142.1 min
+[23:23:24] train 38/51 ppo_rewlat_s0: trained in 77.1 min
+[23:24:08] train 39/51 penref_w0.05_s0: trained in 77.7 min
+[23:26:54] train 40/51 penref_w0.15_s0: trained in 77.8 min
+[23:27:01] train 41/51 penref_w0.5_s0: trained in 77.8 min
+[23:29:35] train 42/51 ppo_rewlat_s1: trained in 78.4 min
+[23:29:41] train 43/51 ppo_obslat_s1: trained in 78.9 min
+[00:44:13] train 44/51 penref_w0.05_s1: trained in 80.8 min
+[00:45:19] train 45/51 penref_w0.15_s1: trained in 81.2 min
+[00:48:19] train 46/51 penref_w0.5_s1: trained in 81.4 min
+[00:48:22] train 47/51 ppo_obslat_s2: trained in 81.4 min
+[00:50:42] train 48/51 ppo_rewlat_s2: trained in 81.1 min
+[00:51:01] train 49/51 penref_w0.05_s2: trained in 81.3 min
+[01:54:07] train 50/51 penref_w0.15_s2: trained in 69.9 min
+[01:55:20] train 51/51 penref_w0.5_s2: trained in 70.0 min
+[01:55:27] E5 evaluation and summary (eval seeds 300-319)
+abl_base_ppo_400k_s0: train 0s, eval 0s
+abl_base_ppo_400k_s1: train 0s, eval 33s
+abl_base_ppo_400k_s2: train 0s, eval 28s
+abl_base_fair_400k_s0: train 0s, eval 28s
+abl_base_fair_400k_s1: train 0s, eval 28s
+abl_base_fair_400k_s2: train 0s, eval 28s
+abl_perfect_obs_ppo_400k_s0: train 0s, eval 28s
+abl_perfect_obs_ppo_400k_s1: train 0s, eval 29s
+abl_perfect_obs_ppo_400k_s2: train 0s, eval 28s
+D:\PES\CapStone\sem7\CrimeML\crimesim\eval\stats.py:72: RuntimeWarning: invalid value encountered in sqrt
+  se = np.sqrt(np.diag(cov))
+abl_perfect_obs_fair_400k_s0: train 0s, eval 28s
+abl_perfect_obs_fair_400k_s1: train 0s, eval 27s
+abl_perfect_obs_fair_400k_s2: train 0s, eval 28s
+abl_const_detect_ppo_400k_s0: train 0s, eval 28s
+abl_const_detect_ppo_400k_s1: train 0s, eval 28s
+abl_const_detect_ppo_400k_s2: train 0s, eval 27s
+D:\PES\CapStone\sem7\CrimeML\crimesim\eval\stats.py:72: RuntimeWarning: invalid value encountered in sqrt
+  se = np.sqrt(np.diag(cov))
+abl_const_detect_fair_400k_s0: train 0s, eval 29s
+abl_const_detect_fair_400k_s1: train 0s, eval 28s
+abl_const_detect_fair_400k_s2: train 0s, eval 28s
+
+== E5 (400k, eval e300n20): disparity x own-variant GreedyOracle ==
+     variant   kind  n_train_seeds  n_eval_seeds  x_ref  x_ref_lo  x_ref_hi  disparity  lat_cov  proxy_gap  rec_distortion  hardship_t
+        base oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.003           1.597         NaN
+        base    ppo              3            20  4.923     4.050     5.920     14.816    0.048      0.021           2.007       9.183
+        base   fair              3            20  0.325     0.315     0.337      0.917    0.045      0.003           0.956     -18.662
+ perfect_obs oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.000           1.000         NaN
+ perfect_obs    ppo              3            20  1.653     1.506     1.862      4.750    0.050     -0.000           1.000      10.733
+ perfect_obs   fair              3            20  0.355     0.343     0.368      0.998    0.046      0.000           1.000      -9.017
+const_detect oracle              1            20  1.000     1.000     1.000      2.817    0.054      0.000           0.999         NaN
+const_detect    ppo              3            20  1.463     1.357     1.594      4.191    0.050      0.000           1.002       7.774
+const_detect   fair              3            20  0.354     0.340     0.368      0.993    0.046     -0.000           1.004     -10.942
+[02:05:43] baselines on eval seeds 200-229
+[02:17:21] eval 1/45 pen_p0.02_s0: ok in 58s
+[02:17:21] eval 2/45 pen_p0.06_s0: ok in 58s
+[02:17:21] eval 3/45 ppo_oracle_s0: ok in 58s
+[02:17:21] eval 4/45 ppo_s0: ok in 59s
+[02:17:21] eval 5/45 pen_p0.4_s0: ok in 59s
+[02:17:21] eval 6/45 pen_p0.15_s0: ok in 59s
+[02:18:10] eval 7/45 ppo_s1: ok in 49s
+[02:18:10] eval 8/45 pen_p0.02_s1: ok in 49s
+[02:18:10] eval 9/45 pen_p0.06_s1: ok in 49s
+[02:18:10] eval 10/45 ppo_oracle_s1: ok in 49s
+[02:18:11] eval 11/45 pen_p0.15_s1: ok in 49s
+[02:18:11] eval 12/45 pen_p0.4_s1: ok in 49s
+[02:18:57] eval 13/45 ppo_s2: ok in 47s
+[02:18:58] eval 14/45 pen_p0.02_s2: ok in 47s
+[02:18:58] eval 15/45 pen_p0.06_s2: ok in 47s
+[02:18:58] eval 16/45 ppo_oracle_s2: ok in 47s
+[02:18:58] eval 17/45 pen_p0.15_s2: ok in 47s
+[02:18:58] eval 18/45 pen_p0.4_s2: ok in 47s
+[02:19:44] eval 19/45 ppo_obslat_s0: ok in 47s
+[02:19:45] eval 20/45 penref_w0.15_s0: ok in 47s
+[02:19:45] eval 21/45 ppo_rewlat_s0: ok in 47s
+[02:19:45] eval 22/45 penref_w0.05_s0: ok in 47s
+[02:19:45] eval 23/45 penref_w0.5_s0: ok in 47s
+[02:19:46] eval 24/45 ppo_obslat_s1: ok in 48s
+[02:20:32] eval 25/45 ppo_rewlat_s1: ok in 48s
+[02:20:33] eval 26/45 penref_w0.05_s1: ok in 48s
+[02:20:33] eval 27/45 penref_w0.15_s1: ok in 48s
+[02:20:33] eval 28/45 penref_w0.5_s1: ok in 48s
+[02:20:33] eval 29/45 ppo_obslat_s2: ok in 48s
+[02:20:34] eval 30/45 ppo_rewlat_s2: ok in 48s
+[02:21:19] eval 31/45 penref_w0.05_s2: ok in 47s
+[02:21:20] eval 32/45 penref_w0.15_s2: ok in 47s
+[02:21:20] eval 33/45 penref_w0.5_s2: ok in 47s
+[02:21:20] eval 34/45 ppo_s3: ok in 47s
+[02:21:21] eval 35/45 ppo_s4: ok in 47s
+[02:21:21] eval 36/45 ppo_oracle_s3: ok in 47s
+[02:22:06] eval 37/45 ppo_oracle_s4: ok in 47s
+[02:22:07] eval 38/45 pen_p0.02_s3: ok in 47s
+[02:22:07] eval 39/45 pen_p0.02_s4: ok in 47s
+[02:22:07] eval 40/45 pen_p0.06_s3: ok in 47s
+[02:22:08] eval 41/45 pen_p0.06_s4: ok in 47s
+[02:22:08] eval 42/45 pen_p0.15_s3: ok in 47s
+[02:22:50] eval 43/45 pen_p0.15_s4: ok in 44s
+[02:22:51] eval 44/45 pen_p0.4_s3: ok in 44s
+[02:22:51] eval 45/45 pen_p0.4_s4: ok in 44s
+[02:22:53] done; failed: none

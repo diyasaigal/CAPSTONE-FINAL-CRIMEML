@@ -42,6 +42,8 @@ VARIANTS = {
     "weak_deterrence": {"detection": {"deterrence_slope": 0.10}},
     "strong_deterrence":{"detection": {"deterrence_slope": 0.30}},
     "no_socio_obs":    {"env": {"include_socioeconomic_obs": False}},
+    "low_p_report":    {"detection": {"p_report": 0.15}},
+    "high_p_report":   {"detection": {"p_report": 0.50}},
     "budget_10":       {"env": {"n_units": 10}},
     "budget_40":       {"env": {"n_units": 40}},
     "history_1":       {"env": {"history": 1}},
@@ -65,11 +67,12 @@ KINDS = {"ppo": lambda pen: {"rl": {"algo": "ppo"}},
 
 
 def train_specs(variants: list[str], seeds: list[int], timesteps: int,
-                penalty: float) -> dict:
+                penalty: float, kinds=tuple(KINDS)) -> dict:
     """run name -> (training config, algo) for every E5 model."""
     specs = {}
     for vname in variants:
-        for kind, extra in KINDS.items():
+        for kind in kinds:
+            extra = KINDS[kind]
             for s in seeds:
                 merged = _merge(VARIANTS[vname], {"rl": {"seed": s, "total_timesteps": timesteps},
                                                   "env": {"seed": s}}, extra(penalty))
@@ -85,6 +88,8 @@ def main() -> None:
     ap.add_argument("--timesteps", type=int, default=400000)
     ap.add_argument("--penalty", type=float, default=0.06)
     ap.add_argument("--only", nargs="+", default=None)
+    ap.add_argument("--kinds", nargs="+", default=list(KINDS), choices=list(KINDS))
+    ap.add_argument("--out-tag", default="", help="suffix for the output files")
     args = ap.parse_args()
     RESULTS.mkdir(exist_ok=True)
     region = load_region_info(20)
@@ -101,8 +106,8 @@ def main() -> None:
         ref = reference_disparity(orc)
         need = long_run_need(refs[refs.policy == "uniform"])
         vt = [orc]
-        specs = train_specs([vname], args.seeds, args.timesteps, args.penalty)
-        for kind in KINDS:
+        specs = train_specs([vname], args.seeds, args.timesteps, args.penalty, args.kinds)
+        for kind in args.kinds:
             frames = []
             for s in args.seeds:
                 name = f"abl_{vname}_{kind}_{budget}_s{s}"
@@ -123,12 +128,13 @@ def main() -> None:
         eps = add_reference_shift(pd.concat(vt, ignore_index=True), ref)
         tables.append((eps, relative_summary(eps, ["variant", "kind"], ref)))
 
-    pd.concat(raw, ignore_index=True).to_pickle(RESULTS / f"e5_{budget}_{suffix}_raw.pkl")
+    stem = f"e5_{budget}_{suffix}{args.out_tag}"
+    pd.concat(raw, ignore_index=True).to_pickle(RESULTS / f"{stem}_raw.pkl")
     pd.concat([e for e, _ in tables], ignore_index=True).to_csv(
-        RESULTS / f"e5_{budget}_{suffix}_episodes.csv", index=False)
+        RESULTS / f"{stem}_episodes.csv", index=False)
     out = (pd.concat([s for _, s in tables], ignore_index=True)
            .merge(pd.DataFrame(inc), on=["variant", "kind"], how="left"))
-    out.to_csv(RESULTS / f"e5_{budget}_{suffix}.csv", index=False)
+    out.to_csv(RESULTS / f"{stem}.csv", index=False)
     cols = ["variant", "kind", "n_train_seeds", "n_eval_seeds", "x_ref", "x_ref_lo", "x_ref_hi",
             "disparity", "lat_cov", "proxy_gap", "rec_distortion", "hardship_t"]
     pd.set_option("display.width", 220)
