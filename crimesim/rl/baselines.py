@@ -144,6 +144,23 @@ class NoPatrolPolicy:
         return np.zeros(env.R)
 
 
+class NeedProportional:
+    """Allocate in proportion to a fixed need vector: each district's long-run
+    latent crime under uniform patrol, estimated on reference seeds (JASSS A12).
+    Unlike ``GreedyOracle``, which follows crime *after* deterrence and so
+    under-serves districts whose crime patrol has suppressed, this follows
+    untreated need. Not deployable (needs latent crime)."""
+    name = "need_prop"
+
+    def __init__(self, need: np.ndarray):
+        self.need = np.asarray(need, float)
+
+    def reset(self): pass
+
+    def act(self, env):
+        return _alloc(self.need.copy(), env)
+
+
 BASELINES = {
     p.name: p for p in [
         UniformPolicy(), RandomPolicy(), EWMAHotspotPolicy(),

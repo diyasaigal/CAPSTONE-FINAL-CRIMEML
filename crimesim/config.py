@@ -103,6 +103,7 @@ class EnvConfig:
     #               an ablation; hard to explore in this noisy environment.
     action_mode: str = "rule"
     observe_latent: bool = False       # oracle only: put latent crime in the observation
+    w_mode: str = "free"               # hardship tilt w: "free" [-2,2], "zero", "nonpos" [-2,0]
     seed: int = 0
 
 
@@ -142,6 +143,8 @@ class RLConfig:
     extractor: str = "mlp"            # "mlp" | "gnn"
     seed: int = 0
     checkpoint_every: int = 0         # >0: save a snapshot every this many steps (learning curves)
+    resume_every: int = 0             # >0: save a resume point every this many steps, so an
+                                      # interrupted run continues from it (crimesim.rl.ppo)
 
 
 @dataclass

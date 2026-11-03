@@ -98,3 +98,21 @@ def test_rollout_logs_rule_parameters():
     df = rollout(FixedRule(3.0, -1.0, 0.25), _cfg(), [1])
     assert np.allclose(df.beta, 3.0) and np.allclose(df.w, -1.0) and np.allclose(df.mu, 0.25)
     assert {"ewma_cv", "hour"} <= set(df.columns)
+
+
+def test_w_modes_restrict_the_hardship_tilt():
+    a = np.array([0.0, 0.7, 0.0])
+    assert PolicingEnv(_cfg()).rule_params(a)[1] == pytest.approx(1.4)
+    assert PolicingEnv(_cfg(w_mode="zero")).rule_params(a)[1] == 0.0
+    assert PolicingEnv(_cfg(w_mode="nonpos")).rule_params(a)[1] == pytest.approx(-1.7)
+    assert PolicingEnv(_cfg(w_mode="nonpos")).rule_params(-a)[1] == pytest.approx(-0.3)
+
+
+def test_need_proportional_follows_need():
+    from crimesim.rl.baselines import NeedProportional
+    env = PolicingEnv(_cfg())
+    env.reset(seed=0)
+    need = np.arange(1, env.R + 1, dtype=float)
+    dep = NeedProportional(need).act(env)
+    assert np.isclose(dep.sum(), env.cfg.env.n_units)
+    assert np.all(np.diff(dep) > 0)

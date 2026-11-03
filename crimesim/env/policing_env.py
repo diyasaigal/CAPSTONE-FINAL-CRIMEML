@@ -102,6 +102,10 @@ class PolicingEnv(gym.Env):
         super().reset(seed=seed)
         if seed is not None:
             self._episode_seed = seed
+            if not self.eval_mode:
+                # each training env draws later episode seeds from its own stream; with
+                # one stream per cfg.env.seed, all parallel envs replayed the same episodes
+                self._rng = np.random.default_rng([self.cfg.env.seed, seed])
         elif not self.eval_mode:
             self._episode_seed = int(self._rng.integers(1 << 31))
         g_rng = np.random.default_rng(self._episode_seed)
@@ -148,11 +152,23 @@ class PolicingEnv(gym.Env):
         }
 
     # ------------------------------------------------------------------
-    @staticmethod
-    def rule_params(action: np.ndarray) -> tuple[float, float, float]:
-        """(beta, w, mu) of the allocation rule encoded by a rule-mode action."""
+    def rule_params(self, action: np.ndarray) -> tuple[float, float, float]:
+        """(beta, w, mu) of the allocation rule encoded by a rule-mode action.
+
+        ``env.w_mode`` restricts the hardship tilt (JASSS A11): "free" w in [-2, 2],
+        "zero" w = 0 (the policy acts through beta and mu only), "nonpos" w in [-2, 0].
+        """
         a = np.clip(np.asarray(action, np.float64), -1.0, 1.0)
-        return 2.0 * (a[0] + 1.0), 2.0 * a[1], 0.5 * (a[2] + 1.0)   # [0,4], [-2,2], [0,1]
+        mode = self.cfg.env.w_mode
+        if mode == "free":
+            w = 2.0 * a[1]
+        elif mode == "zero":
+            w = 0.0
+        elif mode == "nonpos":
+            w = -(a[1] + 1.0)
+        else:
+            raise ValueError(f"unknown w_mode={mode!r}")
+        return 2.0 * (a[0] + 1.0), w, 0.5 * (a[2] + 1.0)        # [0,4], w, [0,1]
 
     def action_to_deployment(self, action: np.ndarray) -> np.ndarray:
         a = np.clip(np.asarray(action, np.float64), -1.0, 1.0)

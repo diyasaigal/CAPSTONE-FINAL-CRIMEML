@@ -24,7 +24,7 @@ import numpy as np
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback
 from stable_baselines3.common.monitor import Monitor
-from stable_baselines3.common.vec_env import DummyVecEnv, VecEnvWrapper, VecNormalize
+from stable_baselines3.common.vec_env import DummyVecEnv, VecEnvWrapper
 
 from crimesim.config import Config
 from crimesim.env.policing_env import PolicingEnv
@@ -100,14 +100,15 @@ def _ppo(cfg: Config, env, verbose):
                policy_kwargs=dict(net_arch=[128, 128]), seed=rl.seed, verbose=verbose)
 
 
-def _finish(model, vnorm, save_dir, cfg, history):
+def _finish(model, vnorm, save_dir, cfg, history, resumed_at=()):
     if save_dir is not None:
-        from crimesim.rl.ppo import save_obs_rms
+        from crimesim.rl.ppo import finish_resume, save_obs_rms
         save_dir = Path(save_dir); save_dir.mkdir(parents=True, exist_ok=True)
         model.save(save_dir / "ppo_model")
         save_obs_rms(vnorm, save_dir / "obs_rms.npz")
         cfg.save(save_dir / "config.yaml")
         np.save(save_dir / "lambda_history.npy", np.array(history) if history else np.zeros((0, 3)))
+        finish_resume(save_dir, list(resumed_at))
     return model, vnorm, history
 
 
@@ -120,20 +121,28 @@ def train_penalized_ppo(cfg: Config, *, save_dir=None, verbose: int = 0):
         raise ValueError(f"unknown penalty_mode={f.penalty_mode!r}")
     if f.penalty_mode == "excess_log_ref" and f.ref_disparity <= 0:
         raise ValueError("penalty_mode='excess_log_ref' needs fairness.ref_disparity > 0")
+    from crimesim.rl.ppo import learn_resumable
     shaped = ShapedRewardWrapper(_venv(cfg), f.penalty, _PENALTY_KEYS[f.penalty_mode])
     norm_r = cfg.env.reward_on not in _COVERAGE_REWARDS
-    vnorm = VecNormalize(shaped, norm_obs=True, norm_reward=norm_r, clip_obs=10.0, gamma=cfg.rl.gamma)
-    model = _ppo(cfg, vnorm, verbose)
-    model.learn(total_timesteps=cfg.rl.total_timesteps, progress_bar=False)
-    return _finish(model, vnorm, save_dir, cfg, [])
+    model, vnorm, resumed_at = learn_resumable(
+        cfg, shaped, lambda v: _ppo(cfg, v, verbose), norm_reward=norm_r,
+        save_dir=save_dir, verbose=verbose)
+    return _finish(model, vnorm, save_dir, cfg, [], resumed_at)
 
 
 def train_lagrangian_ppo(cfg: Config, *, save_dir=None, verbose: int = 0):
     f = cfg.fairness
+    from crimesim.rl.ppo import learn_resumable
     shaped = ShapedRewardWrapper(_venv(cfg), f.lambda_init, "cost")
     norm_r = cfg.env.reward_on not in _COVERAGE_REWARDS
-    vnorm = VecNormalize(shaped, norm_obs=True, norm_reward=norm_r, clip_obs=10.0, gamma=cfg.rl.gamma)
-    model = _ppo(cfg, vnorm, verbose)
     cb = DualAscentCallback(shaped, f.lambda_lr, f.lambda_max, f.cost_limit, verbose)
-    model.learn(total_timesteps=cfg.rl.total_timesteps, callback=cb, progress_bar=False)
-    return _finish(model, vnorm, save_dir, cfg, cb.history)
+
+    def restore(state):                      # the multiplier and its history survive a resume
+        shaped.weight = float(state["lambda"])
+        cb.history[:] = [tuple(h) for h in state["lambda_history"]]
+
+    model, vnorm, resumed_at = learn_resumable(
+        cfg, shaped, lambda v: _ppo(cfg, v, verbose), norm_reward=norm_r, save_dir=save_dir,
+        callbacks=[cb], extra_state=lambda: {"lambda": shaped.weight, "lambda_history": cb.history},
+        restore_state=restore, verbose=verbose)
+    return _finish(model, vnorm, save_dir, cfg, cb.history, resumed_at)
