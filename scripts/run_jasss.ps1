@@ -14,9 +14,8 @@ param([int]$Workers = 4)
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
 $env:PYTHONPATH = "."
-New-Item -ItemType Directory -Force "results\jasss" | Out-Null
-$log = "results\jasss\run.log"
-"===== start $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss'), commit $(git rev-parse --short HEAD), $Workers workers =====" |
-    Out-File -Append -Encoding utf8 $log
-& ".venv-win\Scripts\python.exe" -u scripts\jasss_runs.py --workers $Workers 2>&1 |
-    ForEach-Object { "$_" } | Tee-Object -FilePath $log -Append
+# Python writes the log itself (progress, and the traceback if it crashes); piping a
+# native program through 2>&1 / Tee-Object in Windows PowerShell 5.1 loses its output.
+& ".venv-win\Scripts\python.exe" -u scripts\jasss_runs.py --workers $Workers --log results\jasss\run.log
+"batch exited with code $LASTEXITCODE at $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')" |
+    Out-File -Append -Encoding ascii results\jasss\run.log

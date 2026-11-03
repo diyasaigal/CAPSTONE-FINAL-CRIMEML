@@ -260,8 +260,15 @@ def baseline_jobs(settings) -> list:
 
 
 # ------------------------------------------------------------------ driver
+LOG_FILE: Path | None = None
+
+
 def log(msg):
-    print(f"[{time.strftime('%m-%d %H:%M:%S')}] {msg}", flush=True)
+    line = f"[{time.strftime('%m-%d %H:%M:%S')}] {msg}"
+    print(line, flush=True)
+    if LOG_FILE is not None:
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
 
 
 def timing(steps: int) -> None:
@@ -296,7 +303,34 @@ def main():
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--timing", action="store_true")
     ap.add_argument("--timing-steps", type=int, default=20_000)
+    ap.add_argument("--log", help="also append progress, and any crash, to this file")
     a = ap.parse_args()
+    if a.log:
+        global LOG_FILE
+        LOG_FILE = Path(a.log)
+        LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
+        import faulthandler
+        faulthandler.enable(open(LOG_FILE.with_suffix(".fault"), "a"))   # hard crashes
+        log(f"===== start, commit {_commit()}, {a.workers} workers, groups {a.groups} =====")
+        try:
+            run(a)
+        except BaseException:
+            log("CRASHED\n" + traceback.format_exc())
+            raise
+        return
+    run(a)
+
+
+def _commit() -> str:
+    import subprocess
+    try:
+        return subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True,
+                              text=True).stdout.strip()
+    except OSError:
+        return "?"
+
+
+def run(a):
 
     if a.timing:
         timing(a.timing_steps)
