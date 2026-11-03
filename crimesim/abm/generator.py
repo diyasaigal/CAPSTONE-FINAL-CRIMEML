@@ -40,7 +40,13 @@ class CrimeGenerator:
         self._rcells = np.column_stack([xs[order], ys[order]])   # cells sorted by region
         self._rcount = np.bincount(flat, minlength=self.R)
         self._rstart = np.concatenate([[0], np.cumsum(self._rcount)[:-1]])
-        self._home_p = self.pop_weight.copy()                    # uniform residential population
+        self._home_p = self.pop_weight.copy()                    # residential population shares
+        # hardship as it enters crime: scaled, and optionally dropped from the risk term
+        # spread of hardship around its (population-weighted) mean: changes the rich-poor
+        # contrast while keeping the mean, and so the crime volume, roughly fixed
+        h_mean = float((self.pop_weight * region.hardship).sum())
+        self._hardship = np.clip(h_mean + cfg.hardship_scale * (region.hardship - h_mean), 0.0, None)
+        self._hardship_risk = self._hardship if cfg.hardship_in_risk else np.zeros(self.R)
         self._flat_grid = G * G
         self.reset(np.random.default_rng(0))
 
@@ -59,7 +65,7 @@ class CrimeGenerator:
         self.time = 0
         self.rid = rng.choice(self.R, size=N, p=self._home_p)     # home region
         self.employed = rng.random(N) < (1.0 - reg.unemployment[self.rid])
-        self.stress0 = c.stress_base + reg.hardship[self.rid] + rng.uniform(0, c.stress_noise, N)
+        self.stress0 = c.stress_base + self._hardship[self.rid] + rng.uniform(0, c.stress_noise, N)
         self.stress = self.stress0.copy()
 
         self.hx, self.hy = self._cells_in(self.rid, rng)
@@ -115,7 +121,7 @@ class CrimeGenerator:
         cell_n, cell_emp = rs[0], rs[1]
 
         n_events, self.past_risk, self.stress = dyn.crime_events(
-            self._rng, stress=self.stress, hardship_ca=self.region.hardship, ca=self.rid,
+            self._rng, stress=self.stress, hardship_ca=self._hardship_risk, ca=self.rid,
             ax=self.ax, ay=self.ay, risk_grid=self.risk_grid, past_risk=self.past_risk,
             cell_n=cell_n, cell_emp=cell_emp, employed=self.employed, hour=hour, cfg=c,
         )
@@ -148,7 +154,7 @@ class CrimeGenerator:
         r = self._rng.choice(self.R, size=k, p=self._home_p)
         self.rid[idx] = r
         self.employed[idx] = self._rng.random(k) < (1.0 - reg.unemployment[r])
-        self.stress0[idx] = c.stress_base + reg.hardship[r] + self._rng.uniform(0, c.stress_noise, k)
+        self.stress0[idx] = c.stress_base + self._hardship[r] + self._rng.uniform(0, c.stress_noise, k)
         self.stress[idx] = self.stress0[idx]
         self.hx[idx], self.hy[idx] = self._cells_in(r, self._rng)
         self.lx[idx], self.ly[idx] = self._cells_in(r, self._rng)
@@ -161,8 +167,12 @@ class CrimeGenerator:
     def run_shift(self, patrol: np.ndarray | None = None) -> dict:
         intensity = self.patrol_intensity(patrol)
         latent_cell = np.zeros((self.grid, self.grid))
+        sub_hours, sub_counts = [], []
         for _ in range(self.cfg.steps_per_shift):
-            latent_cell += self._sub_step(intensity)
+            sub = self._sub_step(intensity)
+            latent_cell += sub
+            sub_hours.append(self.time % 24)
+            sub_counts.append(sub.sum())
         if self.cfg.turnover_rate > 0:
             # residential mobility, applied once per shift (rate is per shift here)
             self._turnover(self.cfg.turnover_rate)
@@ -173,4 +183,6 @@ class CrimeGenerator:
             "intensity_region": intensity,
             "mean_stress": float(self.stress.mean()),
             "hour": self.time % 24,
+            # latent crime of each sub-step (one hour) and the hour it ran at
+            "sub_hours": np.array(sub_hours), "sub_counts": np.array(sub_counts),
         }

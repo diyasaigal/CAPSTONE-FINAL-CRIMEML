@@ -28,7 +28,7 @@ import numpy as np
 from gymnasium import spaces
 
 from crimesim.abm.generator import CrimeGenerator
-from crimesim.abm.regions import load_region_info
+from crimesim.abm.regions import region_for
 from crimesim.config import Config
 from crimesim.env.detection import record
 from crimesim.env.fairness import FairnessMeter
@@ -54,7 +54,7 @@ class PolicingEnv(gym.Env):
         self.cfg = cfg or Config()
         self.eval_mode = eval_mode
 
-        self.region = load_region_info(self.cfg.abm.grid)
+        self.region = region_for(self.cfg)
         self.R = self.region.n
         self.pop_weight = self.region.pop_weight
         self.uniform_share = np.full(self.R, 1.0 / self.R)
@@ -148,12 +148,16 @@ class PolicingEnv(gym.Env):
         }
 
     # ------------------------------------------------------------------
+    @staticmethod
+    def rule_params(action: np.ndarray) -> tuple[float, float, float]:
+        """(beta, w, mu) of the allocation rule encoded by a rule-mode action."""
+        a = np.clip(np.asarray(action, np.float64), -1.0, 1.0)
+        return 2.0 * (a[0] + 1.0), 2.0 * a[1], 0.5 * (a[2] + 1.0)   # [0,4], [-2,2], [0,1]
+
     def action_to_deployment(self, action: np.ndarray) -> np.ndarray:
         a = np.clip(np.asarray(action, np.float64), -1.0, 1.0)
         if self._rule:
-            beta = 2.0 * (a[0] + 1.0)                 # [0, 4]  recency concentration
-            w = 2.0 * a[1]                            # [-2, 2] hardship tilt
-            mu = 0.5 * (a[2] + 1.0)                   # [0, 1]  uniform mix
+            beta, w, mu = self.rule_params(a)
             sig = self._ewma_rec / max(self._ewma_rec.mean(), 1e-9)
             sig = np.power(np.clip(sig, 1e-6, None), beta) * np.exp(w * self._z_hardship)
             shares = sig / sig.sum()

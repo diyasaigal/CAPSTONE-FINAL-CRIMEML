@@ -81,3 +81,48 @@ def test_turnover_keeps_population_stationary(region):
         g.run_shift(None)
     late = np.mean([g.run_shift(None)["latent_region"].sum() for _ in range(30)])
     assert 0.7 < late / early < 1.4
+
+
+def test_sub_step_counts_add_up_to_the_shift(region):
+    gen = CrimeGenerator(ABMConfig(), DetectionConfig(), region)
+    gen.reset(np.random.default_rng(0))
+    for _ in range(8):
+        out = gen.run_shift(None)
+        assert np.isclose(out["sub_counts"].sum(), out["latent_cell"].sum())
+        assert out["sub_hours"][-1] == out["hour"] and len(out["sub_hours"]) == 4
+
+
+def test_night_day_ratio_uses_hourly_window():
+    from crimesim.abm.calibration import is_night, night_day_ratio
+    hours = np.arange(24)
+    assert is_night(hours).sum() == 7            # 20, 21, 22, 23, 0, 1, 2
+    counts = np.where(is_night(hours), 3.0, 1.0)
+    assert night_day_ratio(hours, counts) == (3.0, 1.0)
+
+
+def test_hardship_once_and_spread(region):
+    g = _gen(region, hardship_in_risk=False)
+    assert (g._hardship_risk == 0).all() and np.allclose(g._hardship, region.hardship)
+    flat = _gen(region, hardship_scale=0.0)
+    assert np.allclose(flat._hardship, flat._hardship[0])        # no hardship differences
+    mean = (flat.pop_weight * region.hardship).sum()
+    assert np.isclose(flat._hardship[0], mean)
+
+
+def test_population_weighting(region):
+    from crimesim.abm.regions import with_population
+    assert with_population(region, False) is region
+    w = with_population(region, True).pop_weight
+    assert np.isclose(w.sum(), 1.0) and w.max() / w.min() > 2
+    assert np.isclose(region.population.sum(), 2_647_621)         # ACS 2023, all 77 areas
+
+
+def test_jasss_variants_load():
+    from crimesim.experiments.jasss import GENERATOR_VARIANTS, jasss_config
+    base = jasss_config()
+    assert base.abm.population_weighted and base.abm.night_interaction
+    assert not base.abm.hardship_in_risk and base.env.warmup_shifts == 100
+    assert base.detection.p_report == 0.30                          # inherited from base.yaml
+    assert jasss_config("contrast_high").abm.hardship_in_risk
+    assert jasss_config("agents_500", rl={"seed": 3}).abm.n_agents == 500
+    assert set(GENERATOR_VARIANTS) >= {"base", "contrast_low", "contrast_high"}

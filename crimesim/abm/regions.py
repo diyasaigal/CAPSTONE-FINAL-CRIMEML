@@ -11,6 +11,7 @@ fairness meter all consume.
 """
 from __future__ import annotations
 
+import dataclasses
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -39,6 +40,7 @@ class RegionInfo:
     unemployment: np.ndarray      # (R,)
     income: np.ndarray            # (R,) USD per capita
     onehot_cells: np.ndarray      # (G*G, R)
+    population: np.ndarray        # (R,) ACS 2023 residents (see district_population)
 
     def quantile_groups(self, attr: str, n_q: int) -> np.ndarray:
         x = getattr(self, attr)
@@ -97,6 +99,7 @@ def build_region_info(grid: int, region_col: str = "District",
     ca = df["Community Area"].to_numpy()
     ok = np.isfinite(ca)
     ca_pos = np.where(ok, np.nan_to_num(ca, nan=1).astype(int) - 1, 0)
+    population = district_population(ca_pos[ok], df["rpos"].to_numpy()[ok], R)
 
     def agg(vec):
         num = np.bincount(df["rpos"][ok], weights=vec[ca_pos][ok], minlength=R)
@@ -110,23 +113,56 @@ def build_region_info(grid: int, region_col: str = "District",
         hardship=agg(cen.hardship), poverty=agg(cen.poverty),
         unemployment=agg(cen.unemployment), income=agg(cen.income),
         onehot_cells=np.eye(R)[region_of_cell.reshape(-1)],
+        population=population,
     )
+
+
+def district_population(ca_pos: np.ndarray, rpos: np.ndarray, R: int,
+                        path: str | Path | None = None) -> np.ndarray:
+    """Residents per district from ACS 2023 5-year community-area totals.
+
+    Community areas and police districts do not nest, so each area's population
+    is split across districts in proportion to where that area's crime records
+    fall. Every community area has records, so no population is dropped; the
+    split is only approximate inside an area (records are not residents).
+    Source: City of Chicago, "ACS 5 Year Data by Community Area" (t68z-cikk),
+    acs_year 2023, written to ``data/ca_population_acs2023.csv``.
+    """
+    path = Path(path) if path is not None else DATA_DIR / "ca_population_acs2023.csv"
+    pop = pd.read_csv(path).sort_values("community_area")["population"].to_numpy(float)
+    cross = np.zeros((len(pop), R))
+    np.add.at(cross, (ca_pos, rpos), 1.0)
+    cross /= np.clip(cross.sum(1, keepdims=True), 1, None)
+    return pop @ cross
+
+
+def with_population(region: RegionInfo, weighted: bool) -> RegionInfo:
+    """``region`` with residential shares from real population (``weighted``) or uniform."""
+    if not weighted:
+        return region
+    return dataclasses.replace(region, pop_weight=region.population / region.population.sum())
+
+
+def region_for(cfg) -> RegionInfo:
+    """The RegionInfo a run with config ``cfg`` uses. Every script that scores
+    rollouts must load the region this way, since exposure per capita depends on it."""
+    return with_population(load_region_info(cfg.abm.grid), cfg.abm.population_weighted)
 
 
 def load_region_info(grid: int, region_col: str = "District") -> RegionInfo:
     cache = DATA_DIR / f"region_{region_col.lower().replace(' ', '')}_g{grid}.npz"
-    if cache.exists():
+    if cache.exists() and "population" in np.load(cache, allow_pickle=False).files:
         z = np.load(cache, allow_pickle=False)
         return RegionInfo(kind=str(z["kind"]), ids=z["ids"], n=int(z["n"]), grid=int(z["grid"]),
                           region_of_cell=z["region_of_cell"], real_grid=z["real_grid"],
                           real_region=z["real_region"], pop_weight=z["pop_weight"],
                           hardship=z["hardship"], poverty=z["poverty"],
                           unemployment=z["unemployment"], income=z["income"],
-                          onehot_cells=z["onehot_cells"])
+                          onehot_cells=z["onehot_cells"], population=z["population"])
     ri = build_region_info(grid, region_col)
     np.savez(cache, kind=ri.kind, ids=ri.ids, n=ri.n, grid=ri.grid,
              region_of_cell=ri.region_of_cell, real_grid=ri.real_grid,
              real_region=ri.real_region, pop_weight=ri.pop_weight, hardship=ri.hardship,
              poverty=ri.poverty, unemployment=ri.unemployment, income=ri.income,
-             onehot_cells=ri.onehot_cells)
+             onehot_cells=ri.onehot_cells, population=ri.population)
     return ri

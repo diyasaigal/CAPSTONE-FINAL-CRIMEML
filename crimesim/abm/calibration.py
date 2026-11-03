@@ -4,11 +4,16 @@ Run ``python -m crimesim.abm.calibration``. Checks that the NumPy generator
 reproduces the qualitative signatures the Phase-2 paper relies on, before any RL
 is built on top of it:
 
-  1. SDT elasticity   -- raising community hardship raises violent crime, by a
-     margin in the same ballpark as v5's reported +42.6% (Low -> High).
+  1. SDT elasticity   -- raising community hardship clearly raises violent crime
+     (at least +10%, at most +70%, Low -> High). The floor was 20%, set around
+     v5's reported +42.6%; that figure includes v5's double count of hardship
+     (stress and risk term), so the JASSS revision, which counts it once
+     (``hardship_in_risk: false``), lowered it to "clearly positive".
   2. Emergence        -- from a spatially uniform risk grid, crime forms spatial
      clusters (high max/mean concentration).
-  3. Routine-activity -- night shifts carry more crime than daytime shifts.
+  3. Routine-activity -- night hours (20-02) carry at least 10% more crime per
+     hour than day hours (real Chicago records: 1.18). Was "night > day", which
+     a flat profile of 1.01 passed.
   4. Monotonicity     -- Low < Medium < High total crime.
 
 Exits non-zero if any check fails.
@@ -21,10 +26,12 @@ import sys
 import numpy as np
 
 from crimesim.abm.generator import CrimeGenerator
-from crimesim.abm.regions import RegionInfo, load_region_info
+from crimesim.abm.regions import RegionInfo, load_region_info, with_population
 from crimesim.config import ABMConfig, DetectionConfig
 
 SCENARIOS = {"Low": 0.0, "Medium": 0.1, "High": 0.2}
+ELASTICITY_MIN = 10.0     # % crime rise Low -> High
+NIGHT_DAY_MIN = 1.10      # crime per night hour / per day hour
 
 
 def _shift_region(reg: RegionInfo, delta: float) -> RegionInfo:
@@ -35,28 +42,48 @@ def _shift_region(reg: RegionInfo, delta: float) -> RegionInfo:
     )
 
 
+def is_night(hour) -> np.ndarray:
+    """The model's night window (hours 20-02), as in ``dynamics.crime_events``."""
+    hour = np.asarray(hour)
+    return (hour >= 20) | (hour <= 2)
+
+
+def night_day_ratio(hours, counts) -> tuple[float, float]:
+    """Mean crime per night hour and per day hour, from hourly (sub-step) counts.
+
+    The single definition used by the gate and by the validation against real
+    records, so the two report the same quantity. (The gate used to classify a
+    whole 4-hour shift by the hour it ended, which counts e.g. hours 17-20 as night.)
+    """
+    hours, counts = np.asarray(hours), np.asarray(counts, float)
+    n = is_night(hours)
+    return float(counts[n].mean()), float(counts[~n].mean())
+
+
 def _run(cfg, det, reg, seed, n_shifts=90):
     gen = CrimeGenerator(cfg, det, reg)
     gen.reset(np.random.default_rng(seed))
     acc = np.zeros((cfg.grid, cfg.grid))
-    total = night_c = night_n = day_c = day_n = 0.0
+    total = 0.0
+    hours, counts = [], []
     for _ in range(n_shifts):
         out = gen.run_shift(None)
         acc += out["latent_cell"]
         total += out["latent_cell"].sum()
-        if out["hour"] >= 20 or out["hour"] <= 2:
-            night_c += out["latent_cell"].sum(); night_n += 1
-        else:
-            day_c += out["latent_cell"].sum(); day_n += 1
+        hours.extend(out["sub_hours"]); counts.extend(out["sub_counts"])
+    night_rate, day_rate = night_day_ratio(hours, counts)
     return {"total": total, "acc": acc,
-            "night_rate": night_c / max(night_n, 1), "day_rate": day_c / max(day_n, 1),
+            "night_rate": night_rate, "day_rate": day_rate,
             "concentration": float(acc.max() / acc.mean()),
             "nonzero_frac": float((acc > 0).mean())}
 
 
-def run_calibration(n_seeds: int = 8, verbose: bool = True) -> dict:
-    reg0 = load_region_info(20)
-    cfg = ABMConfig()
+def run_calibration(n_seeds: int = 8, verbose: bool = True, cfg: ABMConfig | None = None) -> dict:
+    """Gate on ``cfg`` (default: the original model's values, ``ABMConfig()``).
+    Pass the experiments' ABM settings (``--config configs/base.yaml``) to gate
+    the configuration the results actually use."""
+    cfg = cfg or ABMConfig()
+    reg0 = with_population(load_region_info(cfg.grid), cfg.population_weighted)
     det = DetectionConfig(deterrence_slope=0.0)
 
     totals, results = {}, {}
@@ -74,13 +101,13 @@ def run_calibration(n_seeds: int = 8, verbose: bool = True) -> dict:
     day = np.mean([r["day_rate"] for r in results["Low"]])
 
     checks = {
-        "sdt_elasticity_pct": (elasticity, 20.0 <= elasticity <= 70.0),
+        "sdt_elasticity_pct": (elasticity, ELASTICITY_MIN <= elasticity <= 70.0),
         "monotonic_low_med_high": (
             (totals["Low"].mean(), totals["Medium"].mean(), totals["High"].mean()),
             totals["Low"].mean() < totals["Medium"].mean() < totals["High"].mean()),
         "spatial_clustering_ratio": (conc, conc >= 4.0),
         "not_degenerate_coverage": (nz, 0.4 <= nz <= 0.999),
-        "night_gt_day": ((night, day), night > day),
+        "night_gt_day": ((night, day), night >= NIGHT_DAY_MIN * day),
     }
 
     if verbose:
@@ -89,7 +116,7 @@ def run_calibration(n_seeds: int = 8, verbose: bool = True) -> dict:
               f"{lo:,.0f} / {totals['Medium'].mean():,.0f} / {hi:,.0f}")
         print(f"  SDT elasticity (Low->High): +{elasticity:.1f}%   [v5 reported +42.6%]")
         print(f"  spatial clustering max/mean: {conc:.1f}   nonzero cells: {nz:.1%}")
-        print(f"  night vs day crime rate/shift: {night:,.0f} vs {day:,.0f}")
+        print(f"  night vs day crime per hour: {night:,.1f} vs {day:,.1f} (ratio {night / day:.2f})")
         for k, (val, ok) in checks.items():
             print(f"    [{'PASS' if ok else 'FAIL'}] {k}: {val}")
 
@@ -98,4 +125,11 @@ def run_calibration(n_seeds: int = 8, verbose: bool = True) -> dict:
 
 
 if __name__ == "__main__":
-    sys.exit(0 if run_calibration()["ok"] else 1)
+    import argparse
+    from crimesim.config import load_config
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--config", help="gate this config's ABM settings instead of the code defaults")
+    ap.add_argument("--seeds", type=int, default=8)
+    a = ap.parse_args()
+    cfg = load_config(a.config).abm if a.config else None
+    sys.exit(0 if run_calibration(a.seeds, cfg=cfg)["ok"] else 1)

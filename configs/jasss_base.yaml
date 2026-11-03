@@ -1,0 +1,13 @@
+# Frozen base for the JASSS revision (Gate 1, JASSS_PROGRESS.md). Everything in
+# configs/base.yaml, plus the generator changes decided at Gate 1. base.yaml is
+# left as is: every pre-revision model in runs/ was trained with it.
+_extends: base.yaml
+
+abm:
+  hardship_in_risk: false    # A6: hardship enters stress only (v5 also added it to the risk term)
+  hardship_scale: 1.0        # real ACS hardship spread; latent contrast ~3.1x per resident
+  population_weighted: true  # A8: homes, patrol reference, exposure per capita from ACS 2023
+  night_interaction: true    # A5: night factor on both crime paths; night/day 1.17 (real 1.18)
+
+env:
+  warmup_shifts: 100         # A9: drift after warm-up within +-3% per 100 shifts

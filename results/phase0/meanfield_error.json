@@ -1,0 +1,44 @@
+{
+  "all": {
+    "pairs": 24,
+    "disparity_mean_pct": 1.5608912625420317,
+    "disparity_max_pct": 7.380831304025026,
+    "x_oracle_mean_pct": 8.221334006268343,
+    "x_oracle_max_pct": 13.428005913224217,
+    "r2_log_disparity": 0.9984722627228774,
+    "r2_log_x_oracle": 0.9820777736808688
+  },
+  "by_variant": {
+    "base": {
+      "pairs": 8,
+      "disparity_mean_pct": 3.9477429178364902,
+      "disparity_max_pct": 7.380831304025026,
+      "x_oracle_mean_pct": 6.751236357224569,
+      "x_oracle_max_pct": 13.428005913224217,
+      "r2_log_disparity": 0.9964016246664404,
+      "r2_log_x_oracle": 0.9884683300606101
+    },
+    "const_detect": {
+      "pairs": 8,
+      "disparity_mean_pct": 0.40082436311555947,
+      "disparity_max_pct": 0.7573293847472407,
+      "x_oracle_mean_pct": 8.867226419244673,
+      "x_oracle_max_pct": 10.205828351349966,
+      "r2_log_disparity": 0.999931380989235,
+      "r2_log_x_oracle": 0.9675161642720274
+    },
+    "perfect_obs": {
+      "pairs": 8,
+      "disparity_mean_pct": 0.33410650667404507,
+      "disparity_max_pct": 0.6004754903453424,
+      "x_oracle_mean_pct": 9.045539242335787,
+      "x_oracle_max_pct": 10.29385532367002,
+      "r2_log_disparity": 0.9999468589223751,
+      "r2_log_x_oracle": 0.9664168860544783
+    }
+  },
+  "distinct_model_curves": 2,
+  "oracle_disparity_model": 3.067482282379317,
+  "oracle_disparity_sim": 2.7714216089483763,
+  "oracle_error_pct": 10.682628455916587
+}

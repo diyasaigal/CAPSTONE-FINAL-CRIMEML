@@ -131,6 +131,19 @@ class GreedyOracle:
         return _alloc(base, env)
 
 
+class NoPatrolPolicy:
+    """Deploy nothing: no deterrence, detection at its baseline. The paired
+    counterfactual for 'crime prevented' (latent crime without patrol minus
+    latent crime under a policy, same evaluation seed). Warm-up still runs under
+    proportional patrol, as for every other policy."""
+    name = "no_patrol"
+
+    def reset(self): pass
+
+    def act(self, env):
+        return np.zeros(env.R)
+
+
 BASELINES = {
     p.name: p for p in [
         UniformPolicy(), RandomPolicy(), EWMAHotspotPolicy(),

@@ -75,3 +75,26 @@ def test_determinism_same_seed():
         o1, r1, *_ = e1.step(a)
         o2, r2, *_ = e2.step(a)
         assert np.allclose(o1, o2) and r1 == r2
+
+
+def test_no_patrol_baseline_deploys_nothing():
+    from crimesim.eval.rollout import rollout
+    from crimesim.rl.baselines import NoPatrolPolicy
+    cfg = _cfg()
+    env = PolicingEnv(cfg)
+    env.reset(seed=3)
+    assert (NoPatrolPolicy().act(env) == 0).all()
+    df = rollout(NoPatrolPolicy(), cfg, [3], keep_arrays=True)
+    assert all((d == 0).all() for d in df.deployment)
+    assert all((i == 0).all() for i in df.intensity_region)
+
+
+def test_rollout_logs_rule_parameters():
+    import sys
+    from pathlib import Path
+    sys.path.insert(0, str(Path(__file__).parents[1] / "scripts"))
+    from rule_search import FixedRule
+    from crimesim.eval.rollout import rollout
+    df = rollout(FixedRule(3.0, -1.0, 0.25), _cfg(), [1])
+    assert np.allclose(df.beta, 3.0) and np.allclose(df.w, -1.0) and np.allclose(df.mu, 0.25)
+    assert {"ewma_cv", "hour"} <= set(df.columns)

@@ -55,6 +55,15 @@ class ABMConfig:
     turnover_rate: float = 0.0         # per-shift prob an agent is resampled fresh
                                        # (residential mobility -> keeps the population stationary)
     steps_per_shift: int = 4           # ABM sub-steps per RL decision (one patrol shift)
+    # --- JASSS revision switches; defaults reproduce the pre-revision generator ---
+    hardship_in_risk: bool = True      # v5 adds hardship to stress AND again in the risk term
+                                       # (S = stress + hardship); False keeps it in stress only
+    hardship_scale: float = 1.0        # spread of district hardship around its mean where it
+                                       # enters crime (1 = real data); sets the rich-poor contrast
+    population_weighted: bool = False  # agent homes, patrol reference and per-capita exposure
+                                       # from ACS district population instead of uniform
+    night_interaction: bool = False    # night factor also scales the escalation path
+                                       # (v5 applies it to the environmental path only)
 
 
 @dataclass

@@ -115,6 +115,8 @@ def crime_events(rng, *, stress, hardship_ca, ca, ax, ay, risk_grid, past_risk,
     # --- interaction-driven escalation (v5: mean pairwise stress > trigger) ---
     thresh = 2.0 * cfg.interaction_trigger - stress          # stress_n needed
     k = nbr_n * survival(thresh, stress, cache)              # expected qualifying neighbours
+    if getattr(cfg, "night_interaction", False):
+        k = k * time_factor                                  # routine activity on both paths
     p_int = 1.0 - (1.0 - cfg.interaction_prob) ** k
     crime_int = rng.random(len(stress)) < p_int
 

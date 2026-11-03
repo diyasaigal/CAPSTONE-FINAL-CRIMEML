@@ -42,7 +42,12 @@ def rollout(policy, cfg: Config, seeds, *, keep_arrays: bool = False,
                 elif vecnorm is not None:
                     a = vecnorm.normalize_obs(obs)
                 action, _ = policy.predict(np.asarray(a, np.float32), deterministic=True)
+                # the signal the rule reads this shift, before the step updates it
+                ewma = env._ewma_rec.copy()
                 obs, r, term, trunc, info = env.step(action)
+                if env._rule:
+                    info["rule"] = env.rule_params(action)
+                    info["ewma_cv"] = float(ewma.std() / max(ewma.mean(), 1e-9))
             else:
                 deployment = policy.act(env)
                 obs, r, term, trunc, info = env.step_with_deployment(deployment)
@@ -59,6 +64,10 @@ def rollout(policy, cfg: Config, seeds, *, keep_arrays: bool = False,
                 "gini_cum": info["gini_cum"],
                 "cost": info["cost"],
             }
+            if "rule" in info:
+                rec["beta"], rec["w"], rec["mu"] = info["rule"]
+                rec["ewma_cv"] = info["ewma_cv"]
+                rec["hour"] = env._hour
             if keep_arrays:
                 rec["latent_region"] = info["latent_region"].copy()
                 rec["recorded_region"] = info["recorded_region"].copy()
