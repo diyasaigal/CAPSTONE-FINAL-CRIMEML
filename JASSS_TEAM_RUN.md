@@ -5,10 +5,9 @@ ones, because each model comes out the same whoever trains it.
 
 | Laptop | Groups | Models | Rough time (4 workers) |
 |---|---|---|---|
-| Diya | A10, A11 | 130 (36 already done) | ~30 h |
-| Teammate 1 | A13 | 80 | ~25 h |
-| Teammate 2 | A14, A17 | 90 | ~28 h |
-| Teammate 3 | A6A7 | 80 | ~35–45 h (1000-agent models are slow) |
+| Diya | A10, A11, A17 | 160 (36 already done) | ~40 h |
+| Dennis | A13, A14 | 140 | ~42 h |
+| Ashmith | A6A7 | 80, but the 500- and 1000-agent models are 1.5–3× slower | ~40 h |
 
 ## 1. Setup (once, ~15 min)
 
@@ -50,15 +49,16 @@ ones, because each model comes out the same whoever trains it.
 
 ## 3. Run your groups
 
-Windows (example for Teammate 1):
+Windows:
 ```
-powershell -ExecutionPolicy Bypass -File scripts\run_jasss.ps1 -Groups A13
+Diya:     powershell -ExecutionPolicy Bypass -File scripts\run_jasss.ps1 -Groups A10,A11,A17
+Dennis:   powershell -ExecutionPolicy Bypass -File scripts\run_jasss.ps1 -Groups A13,A14
+Ashmith:  powershell -ExecutionPolicy Bypass -File scripts\run_jasss.ps1 -Groups A6A7
 ```
-Teammate 2: `-Groups A14,A17`. Teammate 3: `-Groups A6A7`.
 
-Mac/Linux:
+Mac/Linux (example for Dennis):
 ```
-PYTHONPATH=. python -u scripts/jasss_runs.py --groups A13 --stages refs train --workers 4 --log results/jasss/run.log
+PYTHONPATH=. python -u scripts/jasss_runs.py --groups A13 A14 --stages refs train --workers 4 --log results/jasss/run.log
 ```
 
 Leave the window open. If it stops (crash, restart, power cut), **run the same command again**.
