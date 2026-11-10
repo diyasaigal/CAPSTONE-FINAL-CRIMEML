@@ -13,3 +13,9 @@ data/ca_lookup_*.npz
 data/processed_crime.csv
 results/pre_pivot/
 runs_pre_pivot/
+
+# JASSS: teammate upload backups, per-rule caches (the grid CSVs hold them), empty crash file
+incoming/
+results/jasss/rules/*/
+results/jasss/run.fault
+results/jasss/run_failed_launches.log

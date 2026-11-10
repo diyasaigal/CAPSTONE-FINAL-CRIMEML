@@ -1,0 +1,513 @@
+[11-05 11:46:20] ===== start, commit b1d6890, 4 workers, groups ['A13,A14'] =====
+[11-05 11:46:20] references ready for 0 settings
+[11-05 11:46:20] 0 models, 4 workers
+[11-05 11:46:20] done; failed: none
+batch exited with code 0 at 2026-11-05 11:46:21
+[11-05 11:48:19] ===== start, commit b1d6890, 4 workers, groups ['A13', 'A14'] =====
+[11-05 11:48:26] references ready for 7 settings
+[11-05 11:48:26] 140 models, 4 workers
+[11-05 12:40:28] 1/140 jasss/base__par0.02_s3: trained, train 51.5 min, eval 0.3 min
+[11-05 12:40:32] 2/140 jasss/base__par0.02_s0: trained, train 51.6 min, eval 0.3 min
+[11-05 12:40:35] 3/140 jasss/base__par0.02_s1: trained, train 51.7 min, eval 0.3 min
+[11-05 12:40:37] 4/140 jasss/base__par0.02_s2: trained, train 51.7 min, eval 0.3 min
+[11-05 13:36:59] 5/140 jasss/base__par0.02_s4: trained, train 55.9 min, eval 0.6 min
+[11-05 13:37:12] 6/140 jasss/base__par0.02_s5: trained, train 56.0 min, eval 0.7 min
+[11-05 13:37:47] 7/140 jasss/base__par0.02_s6: trained, train 56.6 min, eval 0.6 min
+[11-05 13:37:47] 8/140 jasss/base__par0.02_s7: trained, train 56.6 min, eval 0.6 min
+[11-05 14:31:14] 9/140 jasss/base__par0.02_s8: trained, train 53.7 min, eval 0.6 min
+[11-05 14:31:21] 10/140 jasss/base__par0.02_s9: trained, train 53.5 min, eval 0.6 min
+[11-05 14:32:10] 11/140 jasss/base__par0.15_s0: trained, train 53.8 min, eval 0.6 min
+[11-05 14:32:12] 12/140 jasss/base__par0.15_s1: trained, train 53.9 min, eval 0.5 min
+[11-05 15:29:03] 13/140 jasss/base__par0.15_s2: trained, train 57.0 min, eval 0.8 min
+[11-05 15:29:11] 14/140 jasss/base__par0.15_s3: trained, train 57.0 min, eval 0.8 min
+[11-05 15:30:22] 15/140 jasss/base__par0.15_s4: trained, train 57.4 min, eval 0.8 min
+[11-05 15:30:40] 16/140 jasss/base__par0.15_s5: trained, train 57.7 min, eval 0.7 min
+[11-05 16:37:08] 17/140 jasss/base__par0.15_s6: trained, train 67.3 min, eval 0.8 min
+[11-05 16:37:16] 18/140 jasss/base__par0.15_s7: trained, train 67.3 min, eval 0.8 min
+[11-05 16:38:49] 19/140 jasss/base__par0.15_s8: trained, train 67.6 min, eval 0.8 min
+[11-05 16:39:16] 20/140 jasss/base__par0.15_s9: trained, train 67.7 min, eval 0.9 min
+[11-05 17:32:42] 21/140 jasss/base__par0.4_s0: trained, train 54.9 min, eval 0.7 min
+[11-05 17:32:57] 22/140 jasss/base__par0.4_s1: trained, train 55.0 min, eval 0.7 min
+[11-05 17:34:20] 23/140 jasss/base__par0.4_s2: trained, train 54.9 min, eval 0.6 min
+[11-05 17:34:38] 24/140 jasss/base__par0.4_s3: trained, train 54.7 min, eval 0.6 min
+[11-05 18:37:43] 25/140 jasss/base__par0.4_s5: trained, train 64.4 min, eval 0.4 min
+[11-05 18:37:44] 26/140 jasss/base__par0.4_s4: trained, train 64.7 min, eval 0.4 min
+[11-05 18:38:42] 27/140 jasss/base__par0.4_s6: trained, train 64.0 min, eval 0.3 min
+[11-05 18:38:54] 28/140 jasss/base__par0.4_s7: trained, train 63.9 min, eval 0.4 min
+[11-05 19:12:41] 29/140 jasss/base__par0.4_s8: trained, train 34.4 min, eval 0.5 min
+[11-05 19:13:04] 30/140 jasss/base__par0.4_s9: trained, train 34.8 min, eval 0.5 min
+[11-05 19:14:29] 31/140 jasss/base__penref0.05_s0: trained, train 35.3 min, eval 0.5 min
+[11-05 19:14:47] 32/140 jasss/base__penref0.05_s1: trained, train 35.4 min, eval 0.5 min
+[11-05 20:06:38] 33/140 jasss/base__penref0.05_s2: trained, train 53.2 min, eval 0.7 min
+[11-05 20:07:36] 34/140 jasss/base__penref0.05_s3: trained, train 53.8 min, eval 0.7 min
+[11-05 20:09:38] 35/140 jasss/base__penref0.05_s4: trained, train 54.4 min, eval 0.7 min
+[11-05 20:10:11] 36/140 jasss/base__penref0.05_s5: trained, train 54.7 min, eval 0.7 min
+[11-05 21:11:57] 37/140 jasss/base__penref0.05_s6: trained, train 64.6 min, eval 0.7 min
+[11-05 21:13:14] 38/140 jasss/base__penref0.05_s7: trained, train 64.9 min, eval 0.7 min
+[11-05 21:15:26] 39/140 jasss/base__penref0.05_s8: trained, train 65.1 min, eval 0.7 min
+[11-05 21:16:06] 40/140 jasss/base__penref0.05_s9: trained, train 65.2 min, eval 0.7 min
+[11-05 22:00:58] 41/140 jasss/base__penref0.15_s0: trained, train 48.6 min, eval 0.4 min
+[11-05 22:01:49] 42/140 jasss/base__penref0.15_s1: trained, train 48.2 min, eval 0.4 min
+[11-05 22:03:03] 43/140 jasss/base__penref0.15_s2: trained, train 47.2 min, eval 0.4 min
+[11-05 22:03:28] 44/140 jasss/base__penref0.15_s3: trained, train 47.0 min, eval 0.4 min
+[11-05 22:48:07] 45/140 jasss/base__penref0.15_s4: trained, train 46.5 min, eval 0.7 min
+[11-05 22:49:58] 46/140 jasss/base__penref0.15_s5: trained, train 47.3 min, eval 0.8 min
+[11-05 22:52:29] 47/140 jasss/base__penref0.15_s6: trained, train 48.7 min, eval 0.7 min
+[11-05 22:53:19] 48/140 jasss/base__penref0.15_s7: trained, train 49.2 min, eval 0.7 min
+[11-05 23:43:08] 49/140 jasss/base__penref0.15_s8: trained, train 54.4 min, eval 0.6 min
+[11-05 23:46:38] 50/140 jasss/base__penref0.15_s9: trained, train 55.9 min, eval 0.8 min
+[11-05 23:49:13] 51/140 jasss/base__penref0.5_s0: trained, train 55.6 min, eval 1.1 min
+[11-05 23:50:14] 52/140 jasss/base__penref0.5_s1: trained, train 55.8 min, eval 1.1 min
+[11-06 00:41:01] 53/140 jasss/base__penref0.5_s2: trained, train 57.5 min, eval 0.3 min
+[11-06 00:42:01] 54/140 jasss/base__penref0.5_s3: trained, train 55.1 min, eval 0.3 min
+[11-06 00:44:10] 55/140 jasss/base__penref0.5_s4: trained, train 54.3 min, eval 0.7 min
+[11-06 00:45:04] 56/140 jasss/base__penref0.5_s5: trained, train 54.2 min, eval 0.7 min
+[11-06 01:20:28] 57/140 jasss/base__penref0.5_s6: trained, train 39.1 min, eval 0.4 min
+[11-06 01:21:28] 58/140 jasss/base__penref0.5_s7: trained, train 39.1 min, eval 0.4 min
+[11-06 01:23:18] 59/140 jasss/base__penref0.5_s8: trained, train 38.7 min, eval 0.4 min
+[11-06 01:23:56] 60/140 jasss/base__penref0.5_s9: trained, train 38.5 min, eval 0.4 min
+[11-06 02:00:23] 61/140 jasss/base__penneed0.15_s0: trained, train 39.4 min, eval 0.5 min
+[11-06 02:01:40] 62/140 jasss/base__penneed0.15_s1: trained, train 39.7 min, eval 0.5 min
+[11-06 02:04:26] 63/140 jasss/base__penneed0.15_s2: trained, train 40.6 min, eval 0.5 min
+[11-06 02:05:26] 64/140 jasss/base__penneed0.15_s3: trained, train 40.9 min, eval 0.6 min
+[11-06 02:48:07] 65/140 jasss/base__penneed0.15_s4: trained, train 47.1 min, eval 0.6 min
+[11-06 02:49:27] 66/140 jasss/base__penneed0.15_s5: trained, train 47.1 min, eval 0.6 min
+[11-06 02:52:20] 67/140 jasss/base__penneed0.15_s6: trained, train 47.3 min, eval 0.6 min
+[11-06 02:53:34] 68/140 jasss/base__penneed0.15_s7: trained, train 47.6 min, eval 0.6 min
+[11-06 03:43:49] 69/140 jasss/base__penneed0.15_s8: trained, train 55.0 min, eval 0.7 min
+[11-06 03:44:42] 70/140 jasss/base__penneed0.15_s9: trained, train 54.5 min, eval 0.8 min
+[11-06 03:48:56] 71/140 jasss/base__lag_s0: trained, train 55.8 min, eval 0.8 min
+[11-06 03:50:42] 72/140 jasss/base__lag_s1: trained, train 56.1 min, eval 1.1 min
+[11-06 04:41:14] 73/140 jasss/base__lag_s2: trained, train 56.9 min, eval 0.5 min
+[11-06 04:41:38] 74/140 jasss/base__lag_s3: trained, train 56.5 min, eval 0.5 min
+[11-06 05:24:18] 75/140 jasss/base__lag_s4: trained, train 95.2 min, eval 0.3 min
+[11-06 05:25:21] 76/140 jasss/base__lag_s5: trained, train 94.4 min, eval 0.3 min
+[11-06 05:52:01] 77/140 jasss/base__lag_s6: trained, train 70.4 min, eval 0.3 min
+[11-06 05:52:22] 78/140 jasss/base__lag_s7: trained, train 70.4 min, eval 0.4 min
+[11-06 05:54:57] 79/140 jasss/base__lag_s8: trained, train 30.2 min, eval 0.5 min
+[11-06 05:56:39] 80/140 jasss/base__lag_s9: trained, train 30.9 min, eval 0.4 min
+[11-06 06:33:43] 81/140 jasss/gain_low__ppo_s0: trained, train 41.2 min, eval 0.5 min
+[11-06 06:34:13] 82/140 jasss/gain_low__ppo_s1: trained, train 41.3 min, eval 0.5 min
+[11-06 06:37:42] 83/140 jasss/gain_low__ppo_s2: trained, train 42.3 min, eval 0.5 min
+[11-06 06:39:45] 84/140 jasss/gain_low__ppo_s3: trained, train 42.6 min, eval 0.5 min
+[11-06 07:17:27] 85/140 jasss/gain_low__ppo_s4: trained, train 43.3 min, eval 0.5 min
+[11-06 07:17:56] 86/140 jasss/gain_low__ppo_s5: trained, train 43.3 min, eval 0.5 min
+[11-06 07:21:57] 87/140 jasss/gain_low__ppo_s6: trained, train 43.8 min, eval 0.5 min
+[11-06 07:23:59] 88/140 jasss/gain_low__ppo_s7: trained, train 43.7 min, eval 0.5 min
+[11-06 16:07:59] ===== start, commit b1d6890, 4 workers, groups ['A13', 'A14'] =====
+[11-06 16:08:04] references ready for 7 settings
+[11-06 16:08:04] 140 models, 4 workers
+[11-06 16:08:12] 1/140 jasss/base__par0.02_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:12] 2/140 jasss/base__par0.02_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:12] 3/140 jasss/base__par0.02_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:12] 4/140 jasss/base__par0.02_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 5/140 jasss/base__par0.02_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 6/140 jasss/base__par0.02_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 7/140 jasss/base__par0.02_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 8/140 jasss/base__par0.02_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 9/140 jasss/base__par0.02_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 10/140 jasss/base__par0.02_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 11/140 jasss/base__par0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 12/140 jasss/base__par0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 13/140 jasss/base__par0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 14/140 jasss/base__par0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 15/140 jasss/base__par0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 16/140 jasss/base__par0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 17/140 jasss/base__par0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 18/140 jasss/base__par0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 19/140 jasss/base__par0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 20/140 jasss/base__par0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 21/140 jasss/base__par0.4_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 22/140 jasss/base__par0.4_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 23/140 jasss/base__par0.4_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 24/140 jasss/base__par0.4_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 25/140 jasss/base__par0.4_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 26/140 jasss/base__par0.4_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 27/140 jasss/base__par0.4_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 28/140 jasss/base__penref0.05_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 29/140 jasss/base__par0.4_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:13] 30/140 jasss/base__par0.4_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 31/140 jasss/base__par0.4_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 32/140 jasss/base__penref0.05_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 33/140 jasss/base__penref0.05_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 34/140 jasss/base__penref0.05_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 35/140 jasss/base__penref0.05_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 36/140 jasss/base__penref0.05_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 37/140 jasss/base__penref0.05_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 38/140 jasss/base__penref0.05_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 39/140 jasss/base__penref0.05_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 40/140 jasss/base__penref0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 41/140 jasss/base__penref0.05_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 42/140 jasss/base__penref0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 43/140 jasss/base__penref0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 44/140 jasss/base__penref0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 45/140 jasss/base__penref0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 46/140 jasss/base__penref0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 47/140 jasss/base__penref0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 48/140 jasss/base__penref0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 49/140 jasss/base__penref0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 50/140 jasss/base__penref0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 51/140 jasss/base__penref0.5_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 52/140 jasss/base__penref0.5_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 53/140 jasss/base__penref0.5_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 54/140 jasss/base__penref0.5_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:14] 55/140 jasss/base__penref0.5_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 56/140 jasss/base__penref0.5_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 57/140 jasss/base__penref0.5_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 58/140 jasss/base__penref0.5_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 59/140 jasss/base__penref0.5_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 60/140 jasss/base__penneed0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 61/140 jasss/base__penneed0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 62/140 jasss/base__penneed0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 63/140 jasss/base__penneed0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 64/140 jasss/base__penref0.5_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 65/140 jasss/base__penneed0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 66/140 jasss/base__penneed0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 67/140 jasss/base__penneed0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 68/140 jasss/base__penneed0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 69/140 jasss/base__penneed0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 70/140 jasss/base__penneed0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 71/140 jasss/base__lag_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 72/140 jasss/base__lag_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 73/140 jasss/base__lag_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 74/140 jasss/base__lag_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 75/140 jasss/base__lag_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 76/140 jasss/base__lag_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:15] 77/140 jasss/base__lag_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 78/140 jasss/base__lag_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 79/140 jasss/base__lag_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 80/140 jasss/base__lag_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 81/140 jasss/gain_low__ppo_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 82/140 jasss/gain_low__ppo_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 83/140 jasss/gain_low__ppo_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 84/140 jasss/gain_low__ppo_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 85/140 jasss/gain_low__ppo_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 86/140 jasss/gain_low__ppo_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 87/140 jasss/gain_low__ppo_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 16:08:16] 88/140 jasss/gain_low__ppo_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 16:14:27] 89/140 jasss/gain_low__ppo_s9: trained, train 5.9 min, eval 0.3 min
+[11-06 16:14:33] 90/140 jasss/gain_low__ppo_s8: trained, train 5.9 min, eval 0.3 min
+[11-06 16:19:07] 91/140 jasss/gain_high__ppo_s0: trained, train 10.2 min, eval 0.6 min
+[11-06 16:19:19] 92/140 jasss/gain_high__ppo_s1: trained, train 10.4 min, eval 0.7 min
+[11-06 17:09:14] 93/140 jasss/gain_high__ppo_s2: trained, train 54.1 min, eval 0.7 min
+[11-06 17:09:18] 94/140 jasss/gain_high__ppo_s3: trained, train 54.1 min, eval 0.7 min
+[11-06 17:17:15] 95/140 jasss/gain_high__ppo_s4: trained, train 57.5 min, eval 0.7 min
+[11-06 17:17:49] 96/140 jasss/gain_high__ppo_s5: trained, train 57.8 min, eval 0.7 min
+[11-06 18:09:31] 97/140 jasss/gain_high__ppo_s6: trained, train 59.6 min, eval 0.7 min
+[11-06 18:09:32] 98/140 jasss/gain_high__ppo_s7: trained, train 59.5 min, eval 0.7 min
+[11-06 18:17:52] 99/140 jasss/gain_high__ppo_s8: trained, train 59.9 min, eval 0.7 min
+[11-06 18:18:19] 100/140 jasss/gain_high__ppo_s9: trained, train 59.8 min, eval 0.7 min
+[11-06 19:14:51] 101/140 jasss/report_0.15__ppo_s1: trained, train 64.6 min, eval 0.7 min
+[11-06 19:14:53] 102/140 jasss/report_0.15__ppo_s0: trained, train 64.7 min, eval 0.7 min
+[11-06 19:23:18] 103/140 jasss/report_0.15__ppo_s2: trained, train 64.7 min, eval 0.7 min
+[11-06 19:23:47] 104/140 jasss/report_0.15__ppo_s3: trained, train 64.8 min, eval 0.7 min
+[11-06 20:21:48] 105/140 jasss/report_0.15__ppo_s4: trained, train 66.3 min, eval 0.7 min
+[11-06 20:22:18] 106/140 jasss/report_0.15__ppo_s5: trained, train 66.7 min, eval 0.7 min
+[11-06 20:32:01] 107/140 jasss/report_0.15__ppo_s6: trained, train 67.8 min, eval 0.9 min
+[11-06 20:34:09] 108/140 jasss/report_0.15__ppo_s7: trained, train 68.5 min, eval 1.9 min
+[11-06 20:39:03] 109/140 jasss/report_0.50__ppo_s1: FAILED, train 4.9 min, eval 0.0 min
+[11-06 20:39:03] Traceback (most recent call last):
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\scripts\jasss_runs.py", line 178, in _train_job
+    out = ensure_trained(name, cfg, algo)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 166, in train_ppo
+    model, venv, resumed_at = learn_resumable(
+                              ~~~~~~~~~~~~~~~^
+        cfg, raw_vec_env(cfg, rl.n_envs, rl.seed), make_model, norm_reward=norm_reward,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        save_dir=save_dir, callbacks=cbs, verbose=verbose)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 133, in learn_resumable
+    model.learn(total_timesteps=remaining, callback=CallbackList(cbs) if cbs else None,
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                reset_num_timesteps=point is None, progress_bar=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 311, in learn
+    return super().learn(
+           ~~~~~~~~~~~~~^
+        total_timesteps=total_timesteps,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        progress_bar=progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 324, in learn
+    continue_training = self.collect_rollouts(self.env, callback, self.rollout_buffer, n_rollout_steps=self.n_steps)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 192, in collect_rollouts
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 218, in _on_rollout_start
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 82, in _on_rollout_start
+    self.save()
+    ~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 99, in save
+    tmp.rename(final)
+    ~~~~~~~~~~^^^^^^^
+  File "C:\Users\DENNIS\miniconda3\Lib\pathlib\_local.py", line 767, in rename
+    os.rename(self, target)
+    ~~~~~~~~~^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'runs\\jasss\\report_0.50__ppo_s1\\resume_tmp' -> 'runs\\jasss\\report_0.50__ppo_s1\\resume'
+
+[11-06 21:57:18] 110/140 jasss/report_0.50__ppo_s0: FAILED, train 85.3 min, eval 0.0 min
+[11-06 21:57:18] Traceback (most recent call last):
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\scripts\jasss_runs.py", line 178, in _train_job
+    out = ensure_trained(name, cfg, algo)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 166, in train_ppo
+    model, venv, resumed_at = learn_resumable(
+                              ~~~~~~~~~~~~~~~^
+        cfg, raw_vec_env(cfg, rl.n_envs, rl.seed), make_model, norm_reward=norm_reward,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        save_dir=save_dir, callbacks=cbs, verbose=verbose)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 133, in learn_resumable
+    model.learn(total_timesteps=remaining, callback=CallbackList(cbs) if cbs else None,
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                reset_num_timesteps=point is None, progress_bar=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 311, in learn
+    return super().learn(
+           ~~~~~~~~~~~~~^
+        total_timesteps=total_timesteps,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        progress_bar=progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 324, in learn
+    continue_training = self.collect_rollouts(self.env, callback, self.rollout_buffer, n_rollout_steps=self.n_steps)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 192, in collect_rollouts
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 218, in _on_rollout_start
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 82, in _on_rollout_start
+    self.save()
+    ~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 99, in save
+    tmp.rename(final)
+    ~~~~~~~~~~^^^^^^^
+  File "C:\Users\DENNIS\miniconda3\Lib\pathlib\_local.py", line 767, in rename
+    os.rename(self, target)
+    ~~~~~~~~~^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'runs\\jasss\\report_0.50__ppo_s0\\resume_tmp' -> 'runs\\jasss\\report_0.50__ppo_s0\\resume'
+
+[11-06 22:11:55] 111/140 jasss/report_0.50__ppo_s3: FAILED, train 14.6 min, eval 0.0 min
+[11-06 22:11:55] Traceback (most recent call last):
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\scripts\jasss_runs.py", line 178, in _train_job
+    out = ensure_trained(name, cfg, algo)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\experiments\registry.py", line 52, in ensure_trained
+    _, vn = train_ppo(cfg, save_dir=out, verbose=0)
+            ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 166, in train_ppo
+    model, venv, resumed_at = learn_resumable(
+                              ~~~~~~~~~~~~~~~^
+        cfg, raw_vec_env(cfg, rl.n_envs, rl.seed), make_model, norm_reward=norm_reward,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        save_dir=save_dir, callbacks=cbs, verbose=verbose)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 133, in learn_resumable
+    model.learn(total_timesteps=remaining, callback=CallbackList(cbs) if cbs else None,
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                reset_num_timesteps=point is None, progress_bar=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\ppo\ppo.py", line 311, in learn
+    return super().learn(
+           ~~~~~~~~~~~~~^
+        total_timesteps=total_timesteps,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        progress_bar=progress_bar,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 324, in learn
+    continue_training = self.collect_rollouts(self.env, callback, self.rollout_buffer, n_rollout_steps=self.n_steps)
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\on_policy_algorithm.py", line 192, in collect_rollouts
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 218, in _on_rollout_start
+    callback.on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\.venv-win\Lib\site-packages\stable_baselines3\common\callbacks.py", line 91, in on_rollout_start
+    self._on_rollout_start()
+    ~~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 82, in _on_rollout_start
+    self.save()
+    ~~~~~~~~~^^
+  File "C:\Users\DENNIS\Dennis\academics\PES\Capstone\crime-ml-jasss\crime-ml-jasss\crimesim\rl\ppo.py", line 99, in save
+    tmp.rename(final)
+    ~~~~~~~~~~^^^^^^^
+  File "C:\Users\DENNIS\miniconda3\Lib\pathlib\_local.py", line 767, in rename
+    os.rename(self, target)
+    ~~~~~~~~~^^^^^^^^^^^^^^
+PermissionError: [WinError 5] Access is denied: 'runs\\jasss\\report_0.50__ppo_s3\\resume_tmp' -> 'runs\\jasss\\report_0.50__ppo_s3\\resume'
+
+[11-06 22:16:52] ===== start, commit b1d6890, 4 workers, groups ['A13', 'A14'] =====
+[11-06 22:16:55] references ready for 7 settings
+[11-06 22:16:55] 140 models, 4 workers
+[11-06 22:17:02] 1/140 jasss/base__par0.02_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 2/140 jasss/base__par0.02_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 3/140 jasss/base__par0.02_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 4/140 jasss/base__par0.02_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 5/140 jasss/base__par0.02_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 6/140 jasss/base__par0.02_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 7/140 jasss/base__par0.02_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 8/140 jasss/base__par0.02_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 9/140 jasss/base__par0.02_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 10/140 jasss/base__par0.02_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 11/140 jasss/base__par0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 12/140 jasss/base__par0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 13/140 jasss/base__par0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 14/140 jasss/base__par0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 15/140 jasss/base__par0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 16/140 jasss/base__par0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 17/140 jasss/base__par0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 18/140 jasss/base__par0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 19/140 jasss/base__par0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 20/140 jasss/base__par0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 21/140 jasss/base__par0.4_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 22/140 jasss/base__par0.4_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 23/140 jasss/base__par0.4_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 24/140 jasss/base__par0.4_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 25/140 jasss/base__par0.4_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 26/140 jasss/base__par0.4_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 27/140 jasss/base__par0.4_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 28/140 jasss/base__par0.4_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 29/140 jasss/base__par0.4_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 30/140 jasss/base__par0.4_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:02] 31/140 jasss/base__penref0.05_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 32/140 jasss/base__penref0.05_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 33/140 jasss/base__penref0.05_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 34/140 jasss/base__penref0.05_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 35/140 jasss/base__penref0.05_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 36/140 jasss/base__penref0.05_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 37/140 jasss/base__penref0.05_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 38/140 jasss/base__penref0.05_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 39/140 jasss/base__penref0.05_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 40/140 jasss/base__penref0.05_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 41/140 jasss/base__penref0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 42/140 jasss/base__penref0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 43/140 jasss/base__penref0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 44/140 jasss/base__penref0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 45/140 jasss/base__penref0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 46/140 jasss/base__penref0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 47/140 jasss/base__penref0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 48/140 jasss/base__penref0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 49/140 jasss/base__penref0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 50/140 jasss/base__penref0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 51/140 jasss/base__penref0.5_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 52/140 jasss/base__penref0.5_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 53/140 jasss/base__penref0.5_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 54/140 jasss/base__penref0.5_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 55/140 jasss/base__penref0.5_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 56/140 jasss/base__penref0.5_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 57/140 jasss/base__penref0.5_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 58/140 jasss/base__penref0.5_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 59/140 jasss/base__penref0.5_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 60/140 jasss/base__penref0.5_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 61/140 jasss/base__penneed0.15_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 62/140 jasss/base__penneed0.15_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 63/140 jasss/base__penneed0.15_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:03] 64/140 jasss/base__penneed0.15_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 65/140 jasss/base__penneed0.15_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 66/140 jasss/base__penneed0.15_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 67/140 jasss/base__penneed0.15_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 68/140 jasss/base__penneed0.15_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 69/140 jasss/base__penneed0.15_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 70/140 jasss/base__penneed0.15_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 71/140 jasss/base__lag_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 72/140 jasss/base__lag_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 73/140 jasss/base__lag_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 74/140 jasss/base__lag_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 75/140 jasss/base__lag_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 76/140 jasss/base__lag_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 77/140 jasss/base__lag_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 78/140 jasss/base__lag_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 79/140 jasss/base__lag_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 80/140 jasss/base__lag_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 81/140 jasss/gain_low__ppo_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 82/140 jasss/gain_low__ppo_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 83/140 jasss/gain_low__ppo_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 84/140 jasss/gain_low__ppo_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 85/140 jasss/gain_low__ppo_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 86/140 jasss/gain_low__ppo_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 87/140 jasss/gain_low__ppo_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 88/140 jasss/gain_low__ppo_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 89/140 jasss/gain_low__ppo_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 90/140 jasss/gain_high__ppo_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 91/140 jasss/gain_low__ppo_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:04] 92/140 jasss/gain_high__ppo_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 93/140 jasss/gain_high__ppo_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 94/140 jasss/gain_high__ppo_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 95/140 jasss/gain_high__ppo_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 96/140 jasss/gain_high__ppo_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 97/140 jasss/gain_high__ppo_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 98/140 jasss/gain_high__ppo_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 99/140 jasss/gain_high__ppo_s8: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 100/140 jasss/gain_high__ppo_s9: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 101/140 jasss/report_0.15__ppo_s0: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 102/140 jasss/report_0.15__ppo_s1: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 103/140 jasss/report_0.15__ppo_s2: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 104/140 jasss/report_0.15__ppo_s3: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 105/140 jasss/report_0.15__ppo_s4: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 106/140 jasss/report_0.15__ppo_s6: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 107/140 jasss/report_0.15__ppo_s7: cached, train 0.0 min, eval 0.0 min
+[11-06 22:17:05] 108/140 jasss/report_0.15__ppo_s5: cached, train 0.0 min, eval 0.0 min
+[11-06 22:22:03] 109/140 jasss/report_0.15__ppo_s9: trained, train 4.7 min, eval 0.3 min
+[11-06 22:22:03] 110/140 jasss/report_0.15__ppo_s8: trained, train 4.7 min, eval 0.3 min
+[11-06 22:26:28] 111/140 jasss/report_0.50__ppo_s0: trained, train 9.1 min, eval 0.3 min
+[11-06 22:31:20] 112/140 jasss/report_0.50__ppo_s2: trained, train 9.0 min, eval 0.3 min
+[11-06 22:40:52] 113/140 jasss/report_0.50__ppo_s1: trained, train 23.5 min, eval 0.3 min
+[11-06 22:45:47] 114/140 jasss/report_0.50__ppo_s3: trained, train 23.4 min, eval 0.3 min
+[11-06 22:53:44] 115/140 jasss/report_0.50__ppo_s4: trained, train 26.7 min, eval 0.6 min
+[11-06 23:02:21] 116/140 jasss/report_0.50__ppo_s5: trained, train 30.7 min, eval 0.3 min
+[11-06 23:19:29] 117/140 jasss/report_0.50__ppo_s6: trained, train 38.3 min, eval 0.3 min
+[11-06 23:26:50] 118/140 jasss/report_0.50__ppo_s7: trained, train 40.7 min, eval 0.3 min
+[11-06 23:39:27] 119/140 jasss/report_0.50__ppo_s8: trained, train 45.0 min, eval 0.7 min
+[11-06 23:52:03] 120/140 jasss/report_0.50__ppo_s9: trained, train 49.0 min, eval 0.7 min
+[11-07 00:17:00] 121/140 jasss/deter_weak__ppo_s0: trained, train 56.8 min, eval 0.7 min
+[11-07 00:27:11] 122/140 jasss/deter_weak__ppo_s1: trained, train 59.6 min, eval 0.7 min
+[11-07 00:43:07] 123/140 jasss/deter_weak__ppo_s2: trained, train 63.0 min, eval 0.7 min
+[11-07 00:50:50] 124/140 jasss/deter_weak__ppo_s3: trained, train 58.5 min, eval 0.3 min
+[11-07 01:01:51] 125/140 jasss/deter_weak__ppo_s4: trained, train 44.5 min, eval 0.3 min
+[11-07 01:05:45] 126/140 jasss/deter_weak__ppo_s5: trained, train 38.3 min, eval 0.3 min
+[11-07 01:12:38] 127/140 jasss/deter_weak__ppo_s6: trained, train 29.2 min, eval 0.3 min
+[11-07 01:18:06] 128/140 jasss/deter_weak__ppo_s7: trained, train 27.0 min, eval 0.3 min
+[11-07 01:31:18] 129/140 jasss/deter_weak__ppo_s8: trained, train 29.1 min, eval 0.4 min
+[11-07 01:35:28] 130/140 jasss/deter_weak__ppo_s9: trained, train 29.4 min, eval 0.4 min
+[11-07 01:43:20] 131/140 jasss/deter_strong__ppo_s0: trained, train 30.4 min, eval 0.3 min
+[11-07 01:49:33] 132/140 jasss/deter_strong__ppo_s1: trained, train 31.2 min, eval 0.3 min
+[11-07 01:59:49] 133/140 jasss/deter_strong__ppo_s2: trained, train 28.3 min, eval 0.3 min
+[11-07 02:02:51] 134/140 jasss/deter_strong__ppo_s3: trained, train 27.1 min, eval 0.3 min
+[11-07 02:09:24] 135/140 jasss/deter_strong__ppo_s4: trained, train 25.8 min, eval 0.3 min
+[11-07 02:14:37] 136/140 jasss/deter_strong__ppo_s5: trained, train 24.8 min, eval 0.3 min
+[11-07 02:27:23] 137/140 jasss/deter_strong__ppo_s6: trained, train 27.2 min, eval 0.4 min
+[11-07 02:30:39] 138/140 jasss/deter_strong__ppo_s7: trained, train 27.5 min, eval 0.3 min
+[11-07 02:36:04] 139/140 jasss/deter_strong__ppo_s8: trained, train 26.4 min, eval 0.2 min
+[11-07 02:40:06] 140/140 jasss/deter_strong__ppo_s9: trained, train 25.3 min, eval 0.2 min
+[11-07 02:40:09] done; failed: none

@@ -74,7 +74,8 @@ SETTINGS = {
     **{v: (v, {}) for v in ("contrast_low", "contrast_high", "agents_500", "agents_1000")},
     **{f"{v}_const": (v, DET_CONST) for v in ("contrast_low", "contrast_high", "agents_500", "agents_1000")},
 }
-RULE_SETTINGS = ["base", "const", "perfect"]
+# the grid-search optimum per detection setting (A10) and per crime contrast / agent count (A6, A7)
+RULE_SETTINGS = ["base", "const", "perfect", "contrast_low", "contrast_high", "agents_500", "agents_1000"]
 
 LATENT_REWARD = {"env": {"reward_on": "latent_coverage"}}
 SEES_LATENT = {"env": {"observe_latent": True}}
@@ -336,7 +337,12 @@ def run(a):
         timing(a.timing_steps)
         return
 
-    specs = [j for j in model_specs(a.seeds) if j[0] in a.groups]
+    all_specs = model_specs(a.seeds)
+    unknown = set(a.groups) - {j[0] for j in all_specs}
+    if unknown:
+        raise SystemExit(f"unknown group(s) {sorted(unknown)}; "
+                         f"groups are {list(dict.fromkeys(j[0] for j in all_specs))}")
+    specs = [j for j in all_specs if j[0] in a.groups]
     settings = list(dict.fromkeys(s for _, s, *_ in specs))
     if a.dry_run:
         df = pd.DataFrame(specs, columns=["group", "setting", "family", "over", "algo", "seed"])

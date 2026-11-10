@@ -21,6 +21,8 @@ Set-Location $repo
 $env:PYTHONPATH = "."
 $py = ".venv-win\Scripts\python.exe"
 if (-not (Test-Path $py)) { $py = "python" }
+# "powershell -File" passes -Groups A10,A11 as the single string "A10,A11"
+$Groups = @($Groups | ForEach-Object { $_ -split "," } | ForEach-Object { $_.Trim() } | Where-Object { $_ })
 $jobArgs = @("--workers", $Workers, "--log", "results\jasss\run.log")
 if ($Groups.Count -gt 0) { $jobArgs += @("--groups") + $Groups + @("--stages", "refs", "train") }
 # Python writes the log itself (progress, and the traceback if it crashes); piping a

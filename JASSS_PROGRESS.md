@@ -54,5 +54,11 @@ The frozen base is **`configs/jasss_base.yaml`**: it extends `base.yaml` and add
 4. **Displacement (A15).** The recommendation is to skip it.
 5. Any change to the base generator invalidates every trained model, so all models are retrained at 10 seeds in Phase 2 (about 380 models, about 90–100 h).
 
+## Phase 2: core reruns (done 2026-11-10)
+
+All 380 models (10 training seeds × 38 families over 20 settings) were trained on commit `b1d6890`, split across three laptops. Every model was verified, and all were evaluated on one machine (seeds 200–229). Rule-based policies and grid optima were run in every setting. Summary: `scripts/summarise_jasss.py` → `results/jasss/summary/`.
+
+Headline: base PPO is **5.74× the reference [5.17, 6.41]** (10 seeds). The results, the open decisions (the cost claim across settings; headline N) and all remaining work are in **`HANDOVER.md`**.
+
 ## Later phases
 See `C:\Users\diyas\.claude\plans\cuddly-churning-sphinx.md` (Phase 1 generator switches, Phase 2 `scripts/jasss_runs.py`, Phase 4 paper edits, Phase 5 archive).
